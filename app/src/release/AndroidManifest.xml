@@ -1,0 +1,7 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.rofinochungajr.museuonline">
+
+    <application>
+        <activity android:name="com.example.rofinochungajr.museuonline.activity_login_gradbk"></activity>
+    </application>
+</manifest>
