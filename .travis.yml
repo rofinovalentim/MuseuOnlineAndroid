@@ -1,5 +1,8 @@
 language: java
 
+before_install:
+  - chmod +x gradlew
+
 sudo: true
 dist: trusty
 jdk: oraclejdk8
@@ -8,8 +11,6 @@ addons:
   apt:
     packages:
       - oracle-java8-installer
-before_install:
-  - chmod +x gradlew
 
 notifications:
   email:
