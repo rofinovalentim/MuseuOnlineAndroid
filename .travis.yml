@@ -1,16 +1,36 @@
-language: java
+language: android
+jdk: oraclejdk8
+env:
+  global:
+    - ANDROID_API_LEVEL=25
+    - ANDROID_BUILD_TOOLS_VERSION=25.0.0
+android:
+  licenses:
+    - 'android-sdk-preview-license-.+'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
+  components:
+    - tools
+    - tools
+    - platform-tools
+    - extra-google-google_play_services
+    - extra-google-m2repository
+    - extra-android-m2repository
+    - build-tools-25.0.0
+    - android-22
+    - sys-img-armeabi-v7a-android-22
+
+before_script:
+  - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
+  - emulator -avd test -no-audio -no-window &
+  - android-wait-for-emulator
+  - adb shell input keyevent 82 &
 
 before_install:
   - chmod +x gradlew
 
 sudo: true
 dist: trusty
-jdk: oraclejdk8
-
-addons:
-  apt:
-    packages:
-      - oracle-java8-installer
 
 notifications:
   email:
