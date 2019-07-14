@@ -27,6 +27,7 @@ android:
 
 before_install:
   - chmod +x gradlew
+  - yes | sdkmanager "platforms;android-27"
 
 sudo: true
 dist: trusty
