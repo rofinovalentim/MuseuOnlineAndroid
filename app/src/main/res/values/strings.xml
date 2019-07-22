@@ -16,7 +16,19 @@
     </string>
     <string name="textview">TextView</string>
     <string name="name">Name</string>
-    <string name="title_activity_teste">teste</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="title_activity_form_especie">FormEspecieActivity</string>
+    <string name="title_activity_form_especie">Formulário da Especie</string>
+    <string name="lbl_NomeEspecie">Nome Especie</string>
+    <string name="lbl_nomeComun">Nome Comum</string>
+    <string name="lbl_nomeComum">Nome ConomeComummum</string>
+    <string name="lbl_next">Proximo</string>
+    <string name="lbl_habitat">Habitat</string>
+    <string name="lbl_genero">Genero</string>
+    <string name="lbl_coordenadas">Coordenadas</string>
+    <string name="lbl_notas">Notas</string>
+    <string name="lbl_codigo">Codigo</string>
+    <string name="lbl_validacao">Validação</string>
+    <string name="lbl_detalhes">Detalhes</string>
+    <string name="title_menu_ok">Ok</string>
+    <string name="title_menu_cancelar">Cancelar</string>
 </resources>
