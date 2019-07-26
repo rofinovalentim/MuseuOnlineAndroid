@@ -1,19 +1,23 @@
 package com.example.rofinochungajr.museuonline;
 
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.zip.Inflater;
+import com.example.rofinochungajr.museuonline.database.DataBaseOpenHelper;
+import com.example.rofinochungajr.museuonline.domain.model.TipoUtilizador;
+import com.example.rofinochungajr.museuonline.domain.repository.TipoUtilizadorRepository;
 
 public class FormEspecieActivity extends AppCompatActivity {
 
@@ -25,6 +29,12 @@ public class FormEspecieActivity extends AppCompatActivity {
     private EditText editTextNotas;
     private EditText editTextCodigo;
     private EditText editTextValidacao;
+
+    private TipoUtilizadorRepository utilizadorRepository;
+    private TipoUtilizador utilizador;
+    private SQLiteDatabase connection;
+    private DataBaseOpenHelper dataBaseOpenHelper;
+    private ConstraintLayout constraintLayout;
 
 
     @Override
@@ -46,13 +56,18 @@ public class FormEspecieActivity extends AppCompatActivity {
         editTextValidacao = (EditText) findViewById(R.id.editTextValidacao);
 
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        constraintLayout=(ConstraintLayout)findViewById(R.id.constraintFormEspecie);
+
+
+
+        createConnectionDB();
+      /*  fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action ===" + editTextNomeEspecie.getText(), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
 
     }
 
@@ -81,7 +96,9 @@ public class FormEspecieActivity extends AppCompatActivity {
 
         switch (id){
             case R.id.action_ok:{
-                Toast.makeText(this,"Ok selecoonado",Toast.LENGTH_SHORT).show();
+                confirm();
+                //finish();
+                //Toast.makeText(this,"Ok selecoonado",Toast.LENGTH_SHORT).show();
             }break;
             case R.id.action_cancelar:{
                 Toast.makeText(this,"Cancelar selecoonado",Toast.LENGTH_SHORT).show();
@@ -94,5 +111,53 @@ public class FormEspecieActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+
+    private void createConnectionDB(){
+        try{
+            dataBaseOpenHelper=new DataBaseOpenHelper(this);
+            connection=dataBaseOpenHelper.getWritableDatabase();
+
+            //Snackbar.make(constraintLayout, R.string.msg_sucess_conectionDB, Snackbar.LENGTH_SHORT).setAction("ok",null).show();
+            utilizadorRepository=new TipoUtilizadorRepository(connection);
+        }catch (SQLException ex){
+            AlertDialog.Builder dlg=new AlertDialog.Builder(this);
+
+            dlg.setTitle(R.string.title_aviso);
+            dlg.setMessage(ex.getMessage());
+            dlg.setNeutralButton(R.string.msg_ok,null);
+        }
+    }
+    private void validation(){
+
+        String idTipo=editTextNomeEspecie.getText().toString();
+        String tipo=editTextNomeComum.getText().toString();
+        int idTipoUtilizador=7;
+
+        utilizador.setIdTipoUtilizador(56);
+        utilizador.setTipoUtilizador("teste");
+        //utilizador.setIdUtilizador();
+
+    }
+
+    private void confirm(){
+
+        utilizador=new TipoUtilizador();
+        validation();
+        try {
+
+            utilizadorRepository.insert(utilizador);
+            finish();
+
+        }catch (SQLException ex){
+        AlertDialog.Builder dlg=new AlertDialog.Builder(this);
+
+        dlg.setTitle(R.string.title_aviso);
+        dlg.setMessage(ex.getMessage());
+        dlg.setNeutralButton(R.string.msg_ok,null);
+
+    }
     }
 }
