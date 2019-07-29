@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,17 +14,21 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.rofinochungajr.museuonline.database.DataBaseOpenHelper;
+import com.example.rofinochungajr.museuonline.domain.model.Especie;
+import com.example.rofinochungajr.museuonline.domain.model.Genero;
 import com.example.rofinochungajr.museuonline.domain.model.TipoUtilizador;
+import com.example.rofinochungajr.museuonline.domain.repository.EspecieRepository;
 import com.example.rofinochungajr.museuonline.domain.repository.TipoUtilizadorRepository;
 
 public class FormEspecieActivity extends AppCompatActivity {
 
     private EditText editTextNomeEspecie;
     private EditText editTextNomeComum;
-    private EditText editTextGenero;
+    private Spinner spinnerGenero;
     private EditText editTextCoordenadas;
     private EditText editTextHabitat;
     private EditText editTextNotas;
@@ -32,6 +37,8 @@ public class FormEspecieActivity extends AppCompatActivity {
 
     private TipoUtilizadorRepository utilizadorRepository;
     private TipoUtilizador utilizador;
+    private Especie especie;
+    private EspecieRepository especieRepository;
     private SQLiteDatabase connection;
     private DataBaseOpenHelper dataBaseOpenHelper;
     private ConstraintLayout constraintLayout;
@@ -48,7 +55,7 @@ public class FormEspecieActivity extends AppCompatActivity {
 
         editTextNomeEspecie = (EditText) findViewById(R.id.editTextNomeEspecie);
         editTextNomeComum = (EditText) findViewById(R.id.editTextNomeComum);
-        editTextGenero = (EditText) findViewById(R.id.editTextGenero);
+        spinnerGenero = (Spinner) findViewById(R.id.spinnerGenero);
         editTextCoordenadas = (EditText) findViewById(R.id.editTextCoordenadas);
         editTextHabitat = (EditText) findViewById(R.id.editTextHabitat);
         editTextNotas = (EditText) findViewById(R.id.editTextNotas);
@@ -56,7 +63,7 @@ public class FormEspecieActivity extends AppCompatActivity {
         editTextValidacao = (EditText) findViewById(R.id.editTextValidacao);
 
 
-        constraintLayout=(ConstraintLayout)findViewById(R.id.constraintFormEspecie);
+        //constraintLayout=(ConstraintLayout)findViewById(R.id.constraintFormEspecie);
 
 
 
@@ -122,6 +129,7 @@ public class FormEspecieActivity extends AppCompatActivity {
 
             //Snackbar.make(constraintLayout, R.string.msg_sucess_conectionDB, Snackbar.LENGTH_SHORT).setAction("ok",null).show();
             utilizadorRepository=new TipoUtilizadorRepository(connection);
+            especieRepository=new EspecieRepository(connection);
         }catch (SQLException ex){
             AlertDialog.Builder dlg=new AlertDialog.Builder(this);
 
@@ -132,11 +140,28 @@ public class FormEspecieActivity extends AppCompatActivity {
     }
     private void validation(){
 
-        String idTipo=editTextNomeEspecie.getText().toString();
-        String tipo=editTextNomeComum.getText().toString();
+        String nomeEspecie=editTextNomeEspecie.getText().toString();
+        String nomeComum=editTextNomeComum.getText().toString();;
+        String habitat=editTextHabitat.getText().toString();
+        String coordenadas=editTextCoordenadas.getText().toString();
+        String notas=editTextNotas.getText().toString();
+       // String detalhes=editTextDetalhes.getText().toString();
+        String codigo=editTextCodigo.getText().toString();
+        String validacao=editTextValidacao.getText().toString();
+        //String dataCriacao;
+        //int genero=editTextGenero.getText().toString();
         int idTipoUtilizador=7;
 
-        utilizador.setIdTipoUtilizador(56);
+      //  utilizador.setIdTipoUtilizador(56);
+        especie.setNomeEspecie("Ola");
+        especie.setNomeComum("Salama");
+        especie.setHabitat("Tudo bem");
+        especie.setCoordenadas("Ola");
+        especie.setNotas("tchau");
+        especie.setCodigo("dgdgd");
+        especie.setValidacao("tetet");
+
+
         utilizador.setTipoUtilizador("teste");
         //utilizador.setIdUtilizador();
 
@@ -145,9 +170,11 @@ public class FormEspecieActivity extends AppCompatActivity {
     private void confirm(){
 
         utilizador=new TipoUtilizador();
+        especie=new Especie();
         validation();
         try {
 
+            especieRepository.insert(especie);
             utilizadorRepository.insert(utilizador);
             finish();
 

@@ -28,11 +28,11 @@
     <string name="lbl_notas">Notas</string>
     <string name="lbl_codigo">Codigo</string>
     <string name="lbl_validacao">Validação</string>
-    <string name="lbl_detalhes">Detalhes</string>
     <string name="title_menu_ok">Ok</string>
     <string name="title_menu_cancelar">Cancelar</string>
     <string name="title_menu_main_login">Login</string>
     <string name="msg_sucess_conectionDB">conexao criada com sucesso</string>
     <string name="title_aviso">Mensagem de Aviso!</string>
     <string name="msg_ok">Ok</string>
+    <string name="lbl_detalhes">Detalhes</string>
 </resources>

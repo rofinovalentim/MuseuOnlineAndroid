@@ -1,9 +1,13 @@
 package com.example.rofinochungajr.museuonline.domain.repository;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.rofinochungajr.museuonline.domain.model.TipoUtilizador;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TipoUtilizadorRepository {
 
@@ -19,7 +23,7 @@ public class TipoUtilizadorRepository {
     public void insert(TipoUtilizador tipoUtilizador) {
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put("idtipoutilizador", tipoUtilizador.getIdTipoUtilizador());
+        //contentValues.put("idtipoutilizador", tipoUtilizador.getIdTipoUtilizador());
         contentValues.put("tipoutilizador", tipoUtilizador.getTipoUtilizador());
         //contentValues.put("idtipoutilizador", user.getTipoUtilizador().getIdTipoUtilizador());
 
@@ -49,13 +53,13 @@ public class TipoUtilizadorRepository {
 
     }
 
-    /*public List<Utilizador> getAll() {
+    public List<TipoUtilizador> getAll() {
 
-        List<Utilizador> utilizadorList = new ArrayList<Utilizador>();
+        List<TipoUtilizador> tipoUtilizadorList = new ArrayList<TipoUtilizador>();
 
         StringBuilder sql = new StringBuilder();
-        sql.append("SELECT idUtilizador, email, Senha, idtipoutilizador");
-        sql.append(" FROM utilizador");
+        sql.append("SELECT idtipoutilizador , tipoutilizador ");
+        sql.append(" FROM tipoutilizador");
 
         Cursor result = connection.rawQuery(sql.toString(), null);
 
@@ -63,47 +67,47 @@ public class TipoUtilizadorRepository {
             result.moveToFirst();
 
             do {
-                Utilizador utilizador = new Utilizador();
+                TipoUtilizador tipoUtilizador = new TipoUtilizador();
 
-                utilizador.setIdUtilizador(result.getInt(result.getColumnIndexOrThrow("idUtilizador")));
-                utilizador.setEmail(result.getString(result.getColumnIndexOrThrow("email")));
-                utilizador.setPassword(result.getString(result.getColumnIndexOrThrow("Senha")));
+                tipoUtilizador.setIdTipoUtilizador(result.getInt(result.getColumnIndexOrThrow("idtipoutilizador")));
+                tipoUtilizador.setTipoUtilizador(result.getString(result.getColumnIndexOrThrow("tipoutilizador")));
+               /* utilizador.setPassword(result.getString(result.getColumnIndexOrThrow("Senha")));
                 utilizador.getTipoUtilizador().setIdTipoUtilizador(result.getInt(result.getColumnIndexOrThrow("idtipoutilizador")));
+                */
 
-                utilizadorList.add(utilizador);
+                tipoUtilizadorList.add(tipoUtilizador);
 
             } while (result.moveToNext());
 
         }
-        return utilizadorList;
+        return tipoUtilizadorList;
     }
 
-    public Utilizador getUtilizador(int idUtilizador) {
+    public TipoUtilizador getTipoUtilizador(int idTipoUtilizador) {
 
-        Utilizador utilizador = new Utilizador();
+        TipoUtilizador tipoUtilizador = new TipoUtilizador();
 
         StringBuilder sql = new StringBuilder();
 
-        sql.append("SELECT idUtilizador, email, Senha, idtipoutilizador");
-        sql.append(" FROM utilizador");
-        sql.append(" where idUtilizador = ?");
+        sql.append("SELECT idtipoutilizador, tipoutilizador");
+        sql.append(" FROM tipoutilizador");
+        sql.append(" where idtipoutilizador = ?");
 
         String[] parameters = new String[1];
-        parameters[0] = String.valueOf(idUtilizador);
+        parameters[0] = String.valueOf(idTipoUtilizador);
 
         Cursor result = connection.rawQuery(sql.toString(), parameters);
 
         if (result.getCount() > 0) {
             result.moveToFirst();
 
-            utilizador.setIdUtilizador(result.getInt(result.getColumnIndexOrThrow("idUtilizador")));
-            utilizador.setEmail(result.getString(result.getColumnIndexOrThrow("email")));
-            utilizador.setPassword(result.getString(result.getColumnIndexOrThrow("Senha")));
-            utilizador.getTipoUtilizador().setIdTipoUtilizador(result.getInt(result.getColumnIndexOrThrow("idtipoutilizador")));
+            tipoUtilizador.setIdTipoUtilizador(result.getInt(result.getColumnIndexOrThrow("idtipoutilizador")));
+            tipoUtilizador.setTipoUtilizador(result.getString(result.getColumnIndexOrThrow("tipoutilizador")));
 
-            return utilizador;
+            return tipoUtilizador;
         }
-
         return null;
-    }*/
+    }
+
+
 }

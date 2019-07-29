@@ -2,274 +2,197 @@ package com.example.rofinochungajr.museuonline.database;
 
 public class ScriptDDL {
 
-    public static String getCreateDataBase(){
+    public  static String getCreateTableUtilizador(){
         StringBuilder sql=new StringBuilder();
 
+      sql.append("CREATE TABLE utilizador (" +
+              "    idUtilizador     INTEGER PRIMARY KEY AUTOINCREMENT," +
+              "    email            VARCHAR," +
+              "    Senha            VARCHAR," +
+              "    idtipoutilizador INTEGER REFERENCES tipoutilizador (idtipoutilizador) " +
+              ");"
+      );
+        return sql.toString();
+    }
+    public static String getCreateTableTipoUtilizador() {
+        StringBuilder sql = new StringBuilder();
+
+        sql.append("CREATE TABLE tipoutilizador (" +
+                "    idtipoutilizador INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "    tipoutilizador   VARCHAR " +
+                ");"
+        );
+       sql.append("INSERT INTO tipoutilizador (idtipoutilizador, tipoutilizador) VALUES (7, '$pbkdf2-sha512$25000$/n9P6f1f690bgzCm1PofIw$wzTxvm5GWVHWRcgk7f4iZnJGt9Pkd7yAJ4HSIsZnqwOand98.gdf.xRqzqnOcZN8h0n.k1Enx2tcXO8r7qO3sg');\n" +
+                "INSERT INTO tipoutilizador (idtipoutilizador, tipoutilizador) VALUES (19, '$pbkdf2-sha512$25000$K.W8t9Y6xzgnZOx9zxkDwA$v.palSK9MP5/Uq6gu3LfIk9Pj984VQ4TRiSw6Yq4YJMCqDGvSI4RIRaDf10nJho/Jl2GqMhKJJ4.8pPgVC/CmQ');\n" +
+                "INSERT INTO tipoutilizador (idtipoutilizador, tipoutilizador) VALUES (2016, '$pbkdf2-sha512$25000$oLQWYqyVMgZAKCUkxJhTSg$JdDWQ7hgQtBk4QAB0z0RHgTd/eD6g.SAsj18RCjC2ghy4cvc9973e1pp0me6Elvv/G67iqgaf/xwjVxEDSt4kw');\n"
+        );
+        return sql.toString();
+    }
+
+    public static String getCreateTableReino() {
+        StringBuilder sql = new StringBuilder();
+
+        sql.append("CREATE TABLE reino (" +
+                "    idReino INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "    Reino   VARCHAR" +
+                ");"
+        );
+        sql.append("INSERT INTO reino (idReino, Reino) VALUES (3, 'Fungi');\n" +
+                "INSERT INTO reino (idReino, Reino) VALUES (4, 'Protista');\n" +
+                "INSERT INTO reino (idReino, Reino) VALUES (5, 'Plantae');\n" +
+                "INSERT INTO reino (idReino, Reino) VALUES (6, 'Monera');\n" +
+                "INSERT INTO reino (idReino, Reino) VALUES (7, 'Animalia');\n" +
+                "INSERT INTO reino (idReino, Reino) VALUES (8, 'Fungire');\n"
+        );
+        return sql.toString();
+    }
 
 
-       sql.append("DROP TABLE IF EXISTS cadastroPedido;" +
-               "CREATE TABLE cadastroPedido (" +
-               " idcadastroPedido int(11) NOT NULL AUTO_INCREMENT," +
-               " email varchar(255) DEFAULT NULL, " +
-               " password varchar(255) DEFAULT NULL, " +
-               " PRIMARY KEY (`idcadastroPedido`)" +
-               ") ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;"
-       );
+    public static String getCreateTableFilo() {
+        StringBuilder sql = new StringBuilder();
 
-        sql.append("DROP TABLE IF EXISTS `classe`;" +
-                "CREATE TABLE `classe` (" +
-                "  `idClasse` int(10) unsigned NOT NULL AUTO_INCREMENT," +
-                "  `Classe` varchar(45) NOT NULL DEFAULT '',\n" +
-                "  `idFilo` int(10) unsigned DEFAULT NULL,\n" +
-                "  PRIMARY KEY (`idClasse`),\n" +
-                "  KEY `FK_Classe_1` (`idFilo`),\n" +
-                "  CONSTRAINT `FK_Classe_1` FOREIGN KEY (`idFilo`) REFERENCES `filo` (`idFilo`) ON DELETE CASCADE ON UPDATE CASCADE\n" +
-                ") ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;"
+        sql.append("CREATE TABLE filo (" +
+                "    idFilo  INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "    Filo    VARCHAR," +
+                "    idReino INTEGER REFERENCES reino (idReino) " +
+                ");"
         );
 
-        sql.append("DROP TABLE IF EXISTS `distrito`;\n" +
-                "CREATE TABLE `distrito` (\n" +
-                "  `idDistrito` int(10) unsigned NOT NULL AUTO_INCREMENT,\n" +
-                "  `Distrito` varchar(45) NOT NULL DEFAULT '',\n" +
-                "  `idProvincia` int(10) unsigned NOT NULL DEFAULT '0',\n" +
-                "  PRIMARY KEY (`idDistrito`),\n" +
-                "  KEY `FK_distrito_1` (`idProvincia`),\n" +
-                "  CONSTRAINT `FK_distrito_1` FOREIGN KEY (`idProvincia`) REFERENCES `provincia` (`idProvincia`)\n" +
-                ") ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=latin1;\n"
+        sql.append("INSERT INTO filo (idFilo, Filo, idReino) VALUES (4, 'Ciliophora', 4);\n" +
+                "INSERT INTO filo (idFilo, Filo, idReino) VALUES (6, 'Rhizopoda', 4);\n" +
+                "INSERT INTO filo (idFilo, Filo, idReino) VALUES (7, 'Ascomycota', 3);\n" +
+                "INSERT INTO filo (idFilo, Filo, idReino) VALUES (8, 'Basidiomycota', 3);\n" +
+                "INSERT INTO filo (idFilo, Filo, idReino) VALUES (9, 'Glomeromycota', 3);\n" +
+                "INSERT INTO filo (idFilo, Filo, idReino) VALUES (10, 'Micospora', 3);\n" +
+                "INSERT INTO filo (idFilo, Filo, idReino) VALUES (11, 'Zygomycota', 3);\n" +
+                "INSERT INTO filo (idFilo, Filo, idReino) VALUES (12, 'Anthocerotophyta', 5);\n" +
+                "INSERT INTO filo (idFilo, Filo, idReino) VALUES (13, 'Bryophyta', 5);\n" +
+                "INSERT INTO filo (idFilo, Filo, idReino) VALUES (14, 'Charophyta', 5);\n" +
+                "INSERT INTO filo (idFilo, Filo, idReino) VALUES (15, 'Equisetophyta', 5);\n" +
+                "INSERT INTO filo (idFilo, Filo, idReino) VALUES (16, 'Annelida', 7);\n" +
+                "INSERT INTO filo (idFilo, Filo, idReino) VALUES (17, 'Arthropoda', 7);\n" +
+                "INSERT INTO filo (idFilo, Filo, idReino) VALUES (18, 'Brachiopoda', 7);\n" +
+                "INSERT INTO filo (idFilo, Filo, idReino) VALUES (19, 'Chordata', 7);\n" +
+                "\n"
         );
-        sql.append("DROP TABLE IF EXISTS `especie`;\n" +
-                "CREATE TABLE `especie` (\n" +
-                "  `idEspecie` int(10) unsigned NOT NULL AUTO_INCREMENT,\n" +
-                "  `Especie` varchar(45) DEFAULT NULL,\n" +
-                "  `idGenero` int(10) unsigned DEFAULT NULL,\n" +
-                "  `Habitat` varchar(1000) DEFAULT NULL,\n" +
-                "  `Coordenadas` varchar(600) DEFAULT NULL,\n" +
-                "  `Notas` varchar(1000) DEFAULT NULL,\n" +
-                "  `detalhes` varchar(1000) DEFAULT NULL,\n" +
-                "  `NomeComum` varchar(45) DEFAULT NULL,\n" +
-                "  `Codigo` varchar(10000) DEFAULT NULL,\n" +
-                "  `Validacao` varchar(45) NOT NULL DEFAULT 'Nao Validado',\n" +
-                "  `DataCriacao` date NOT NULL DEFAULT '0000-00-00',\n" +
-                "  PRIMARY KEY (`idEspecie`),\n" +
-                "  KEY `FK_Especie_1` (`idGenero`),\n" +
-                "  CONSTRAINT `FK_Especie_1` FOREIGN KEY (`idGenero`) REFERENCES `genero` (`idGenero`)\n" +
-                ") ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;\n"
-        );
-        sql.append("DROP TABLE IF EXISTS `especieImagem`;\n" +
-                "CREATE TABLE `especieImagem` (\n" +
-                "  `idImagem` int(10) unsigned NOT NULL AUTO_INCREMENT,\n" +
-                "  `imagem` varchar(1000) DEFAULT NULL,\n" +
-                "  `idEspecie` int(10) unsigned NOT NULL,\n" +
-                "  PRIMARY KEY (`idImagem`),\n" +
-                "  KEY `FK_Figura_Especie` (`idEspecie`),\n" +
-                "  CONSTRAINT `FK_Figura_Especie` FOREIGN KEY (`idEspecie`) REFERENCES `especie` (`idEspecie`) ON DELETE CASCADE ON UPDATE CASCADE\n" +
-                ") ENGINE=InnoDB DEFAULT CHARSET=latin1;\n"
-        );
-        sql.append("DROP TABLE IF EXISTS `especieincompleta`;\n" +
-                "CREATE TABLE `especieincompleta` (\n" +
-                "  `idEspecie` int(10) unsigned NOT NULL DEFAULT '0',\n" +
-                "  `idFamilia` int(10) unsigned DEFAULT NULL,\n" +
-                "  `idOrdem` int(10) unsigned DEFAULT NULL,\n" +
-                "  `idClasse` int(10) unsigned DEFAULT NULL,\n" +
-                "  `idFilo` int(10) unsigned DEFAULT NULL,\n" +
-                "  `idReino` int(10) unsigned DEFAULT NULL,\n" +
-                "  PRIMARY KEY (`idEspecie`),\n" +
-                "  KEY `FK_especieIncompleta_2` (`idFamilia`),\n" +
-                "  KEY `FK_especieIncompleta_3` (`idOrdem`),\n" +
-                "  KEY `FK_especieIncompleta_4` (`idClasse`),\n" +
-                "  KEY `FK_especieIncompleta_5` (`idFilo`),\n" +
-                "  KEY `FK_especieIncompleta_6` (`idReino`),\n" +
-                "  CONSTRAINT `FK_especieIncompleta_1` FOREIGN KEY (`idEspecie`) REFERENCES `especie` (`idEspecie`),\n" +
-                "  CONSTRAINT `FK_especieIncompleta_2` FOREIGN KEY (`idFamilia`) REFERENCES `familia` (`idFamilia`),\n" +
-                "  CONSTRAINT `FK_especieIncompleta_3` FOREIGN KEY (`idOrdem`) REFERENCES `ordem` (`idOrdem`),\n" +
-                "  CONSTRAINT `FK_especieIncompleta_4` FOREIGN KEY (`idClasse`) REFERENCES `classe` (`idClasse`),\n" +
-                "  CONSTRAINT `FK_especieIncompleta_5` FOREIGN KEY (`idFilo`) REFERENCES `filo` (`idFilo`),\n" +
-                "  CONSTRAINT `FK_especieIncompleta_6` FOREIGN KEY (`idReino`) REFERENCES `reino` (`idReino`)\n" +
-                ") ENGINE=InnoDB DEFAULT CHARSET=latin1;"
+        return sql.toString();
+    }
+
+    public static String getCreateTableClasse() {
+        StringBuilder sql = new StringBuilder();
+
+       sql.append("CREATE TABLE classe (" +
+                "    idClasse INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "    Classe   VARCHAR," +
+                "    idFilo   INTEGER REFERENCES filo (idFilo) " +
+                ");"
         );
 
-        sql.append("DROP TABLE IF EXISTS `especieSom`;\n" +
-                "CREATE TABLE `especieSom` (\n" +
-                "  `idSom` int(10) unsigned NOT NULL AUTO_INCREMENT,\n" +
-                "  `som` varchar(1000) DEFAULT NULL,\n" +
-                "  `idEspecie` int(10) unsigned NOT NULL,\n" +
-                "  PRIMARY KEY (`idSom`),\n" +
-                "  KEY `FK_especieSom` (`idEspecie`),\n" +
-                "  CONSTRAINT `FK_especieSom` FOREIGN KEY (`idEspecie`) REFERENCES `especie` (`idEspecie`)\n" +
-                ") ENGINE=InnoDB DEFAULT CHARSET=latin1;\n"
+        sql.append("INSERT INTO classe (idClasse, Classe, idFilo) VALUES (11, 'Entognatha', 17);\n" +
+                "INSERT INTO classe (idClasse, Classe, idFilo) VALUES (12, 'Insecta', 17);\n" +
+                "INSERT INTO classe (idClasse, Classe, idFilo) VALUES (13, 'Agaricomycetes', 8);\n" +
+                "INSERT INTO classe (idClasse, Classe, idFilo) VALUES (14, 'Actinopterygii', 19);\n" +
+                "INSERT INTO classe (idClasse, Classe, idFilo) VALUES (15, 'Malacostraca', 17);\n" +
+                "INSERT INTO classe (idClasse, Classe, idFilo) VALUES (16, 'Diplopoda', 17);\n" +
+                "INSERT INTO classe (idClasse, Classe, idFilo) VALUES (17, 'Glomeromycetes', 9);\n" +
+                "INSERT INTO classe (idClasse, Classe, idFilo) VALUES (19, 'Dothideomycetes', 7);\n" +
+                "INSERT INTO classe (idClasse, Classe, idFilo) VALUES (20, 'Arachnida', 17);\n" +
+                "INSERT INTO classe (idClasse, Classe, idFilo) VALUES (21, 'Sordariomycetes', 7);"
         );
-        sql.append("DROP TABLE IF EXISTS `especieVideo`;\n" +
-                "CREATE TABLE `especieVideo` (\n" +
-                "  `idVideo` int(10) unsigned NOT NULL AUTO_INCREMENT,\n" +
-                "  `video` varchar(1000) DEFAULT NULL,\n" +
-                "  `idEspecie` int(10) unsigned NOT NULL,\n" +
-                "  PRIMARY KEY (`idVideo`),\n" +
-                "  KEY `FK_especieVideo` (`idEspecie`),\n" +
-                "  CONSTRAINT `FK_especieVideo` FOREIGN KEY (`idEspecie`) REFERENCES `especie` (`idEspecie`)\n" +
-                ") ENGINE=InnoDB DEFAULT CHARSET=latin1;\n"
-        );
-        sql.append("DROP TABLE IF EXISTS `familia`;\n" +
-                "CREATE TABLE `familia` (\n" +
-                "  `idFamilia` int(10) unsigned NOT NULL AUTO_INCREMENT,\n" +
-                "  `Familia` varchar(45) NOT NULL DEFAULT '',\n" +
-                "  `idOrdem` int(10) unsigned DEFAULT NULL,\n" +
-                "  PRIMARY KEY (`idFamilia`),\n" +
-                "  KEY `FK_Familia_1` (`idOrdem`),\n" +
-                "  CONSTRAINT `FK_Familia_1` FOREIGN KEY (`idOrdem`) REFERENCES `ordem` (`idOrdem`)\n" +
-                ") ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;\n"
-        );
-        sql.append("DROP TABLE IF EXISTS `filo`;\n" +
-                "CREATE TABLE `filo` (\n" +
-                "  `idFilo` int(10) unsigned NOT NULL AUTO_INCREMENT,\n" +
-                "  `Filo` varchar(45) NOT NULL DEFAULT '',\n" +
-                "  `idReino` int(10) unsigned DEFAULT NULL,\n" +
-                "  PRIMARY KEY (`idFilo`),\n" +
-                "  KEY `FK_Filo_1` (`idReino`),\n" +
-                "  CONSTRAINT `FK_Filo_1` FOREIGN KEY (`idReino`) REFERENCES `reino` (`idReino`) ON DELETE CASCADE ON UPDATE CASCADE\n" +
-                ") ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;\n"
-        );
-        sql.append("DROP TABLE IF EXISTS `genero`;\n" +
-                "CREATE TABLE `genero` (\n" +
-                "  `idGenero` int(10) unsigned NOT NULL AUTO_INCREMENT,\n" +
-                "  `Genero` varchar(45) NOT NULL DEFAULT 'N/A',\n" +
-                "  `idFamilia` int(10) unsigned DEFAULT NULL,\n" +
-                "  PRIMARY KEY (`idGenero`),\n" +
-                "  KEY `FK_Genero_1` (`idFamilia`),\n" +
-                "  CONSTRAINT `FK_Genero_1` FOREIGN KEY (`idFamilia`) REFERENCES `familia` (`idFamilia`)\n" +
-                ") ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;\n"
-        );
-        sql.append("DROP TABLE IF EXISTS `localizacaoespecie`;\n" +
-                "CREATE TABLE `localizacaoespecie` (\n" +
-                "  `idLocalizacao` int(10) unsigned NOT NULL AUTO_INCREMENT,\n" +
-                "  `idDistrito` int(10) unsigned NOT NULL DEFAULT '0',\n" +
-                "  `idEspecie` int(10) unsigned NOT NULL DEFAULT '0',\n" +
-                "  PRIMARY KEY (`idLocalizacao`,`idDistrito`,`idEspecie`),\n" +
-                "  KEY `FK_LocalizacaoEspecie_2` (`idDistrito`),\n" +
-                "  KEY `FK_LocalizacaoEspecie_1` (`idEspecie`),\n" +
-                "  CONSTRAINT `fk_localizacaoespecie_1` FOREIGN KEY (`idDistrito`) REFERENCES `distrito` (`idDistrito`) ON DELETE CASCADE ON UPDATE CASCADE,\n" +
-                "  CONSTRAINT `fk_localizacaoespecie_2` FOREIGN KEY (`idEspecie`) REFERENCES `especie` (`idEspecie`) ON DELETE CASCADE ON UPDATE CASCADE\n" +
-                ") ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;\n"
-        );
-        sql.append("DROP TABLE IF EXISTS `localizacaoincompleta`;\n" +
-                "CREATE TABLE `localizacaoincompleta` (\n" +
-                "  `idEspecie` int(10) unsigned DEFAULT NULL,\n" +
-                "  `idProvincia` int(10) unsigned DEFAULT NULL,\n" +
-                "  `idRegiao` int(10) unsigned DEFAULT NULL,\n" +
-                "  `idLocalizacao` int(10) unsigned NOT NULL DEFAULT '0',\n" +
-                "  PRIMARY KEY (`idLocalizacao`),\n" +
-                "  KEY `FK_localizacaoincompleta_1` (`idEspecie`),\n" +
-                "  KEY `FK_localizacaoincompleta_3` (`idProvincia`),\n" +
-                "  KEY `FK_localizacaoincompleta_4` (`idRegiao`),\n" +
-                "  CONSTRAINT `FK_localizacaoincompleta_1` FOREIGN KEY (`idEspecie`) REFERENCES `especie` (`idEspecie`),\n" +
-                "  CONSTRAINT `FK_localizacaoincompleta_3` FOREIGN KEY (`idProvincia`) REFERENCES `provincia` (`idProvincia`),\n" +
-                "  CONSTRAINT `FK_localizacaoincompleta_4` FOREIGN KEY (`idRegiao`) REFERENCES `regiao` (`idRegiao`)\n" +
-                ") ENGINE=InnoDB DEFAULT CHARSET=latin1;\n"
-        );
-        sql.append("DROP TABLE IF EXISTS `metododepreservacao`;\n" +
-                "CREATE TABLE `metododepreservacao` (\n" +
-                "  `idMetodoDePreservacao` int(10) unsigned NOT NULL AUTO_INCREMENT,\n" +
-                "  `Metodo` varchar(100) NOT NULL DEFAULT '',\n" +
-                "  PRIMARY KEY (`idMetodoDePreservacao`)\n" +
-                ") ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;"
-        );
-        sql.append("DROP TABLE IF EXISTS `ordem`;\n" +
-                "CREATE TABLE `ordem` (\n" +
-                "  `idOrdem` int(10) unsigned NOT NULL AUTO_INCREMENT,\n" +
-                "  `Ordem` varchar(45) NOT NULL DEFAULT '',\n" +
-                "  `idClasse` int(10) unsigned DEFAULT NULL,\n" +
-                "  PRIMARY KEY (`idOrdem`),\n" +
-                "  KEY `FK_Ordem_1` (`idClasse`),\n" +
-                "  CONSTRAINT `FK_Ordem_1` FOREIGN KEY (`idClasse`) REFERENCES `classe` (`idClasse`)\n" +
-                ") ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;\n"
-        );
-        sql.append("DROP TABLE IF EXISTS `pessoa`;\n" +
-                "CREATE TABLE `pessoa` (\n" +
-                "  `idPessoa` int(10) unsigned NOT NULL AUTO_INCREMENT,\n" +
-                "  `Nome` varchar(45) NOT NULL DEFAULT '',\n" +
-                "  PRIMARY KEY (`idPessoa`)\n" +
-                ") ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;\n"
-        );
-        sql.append("DROP TABLE IF EXISTS `preservacaoespecie`;\n" +
-                "CREATE TABLE `preservacaoespecie` (\n" +
-                "  `idPreservacaoEspecie` int(10) unsigned NOT NULL AUTO_INCREMENT,\n" +
-                "  `idMetodoDePreservacao` int(10) unsigned NOT NULL DEFAULT '0',\n" +
-                "  `idEspecie` int(10) unsigned NOT NULL DEFAULT '0',\n" +
-                "  PRIMARY KEY (`idPreservacaoEspecie`),\n" +
-                "  KEY `FK_PreservacaoEspecie_1` (`idMetodoDePreservacao`),\n" +
-                "  KEY `FK_preservacaoespecie_2` (`idEspecie`),\n" +
-                "  CONSTRAINT `FK_PreservacaoEspecie_1` FOREIGN KEY (`idMetodoDePreservacao`) REFERENCES `metododepreservacao` (`idMetodoDePreservacao`) ON DELETE CASCADE ON UPDATE CASCADE,\n" +
-                "  CONSTRAINT `FK_preservacaoespecie_2` FOREIGN KEY (`idEspecie`) REFERENCES `especie` (`idEspecie`) ON DELETE CASCADE ON UPDATE CASCADE\n" +
-                ") ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;\n"
-        );
-        sql.append("DROP TABLE IF EXISTS `provincia`;\n" +
-                "CREATE TABLE `provincia` (\n" +
-                "  `idProvincia` int(10) unsigned NOT NULL AUTO_INCREMENT,\n" +
-                "  `Provincia` varchar(45) NOT NULL DEFAULT '',\n" +
-                "  `idRegiao` int(10) unsigned NOT NULL DEFAULT '0',\n" +
-                "  PRIMARY KEY (`idProvincia`),\n" +
-                "  KEY `FK_Provincia_1` (`idRegiao`),\n" +
-                "  CONSTRAINT `FK_Provincia_1` FOREIGN KEY (`idRegiao`) REFERENCES `regiao` (`idRegiao`)\n" +
-                ") ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;\n"
-        );
+        return sql.toString();
+    }
 
-        sql.append("DROP TABLE IF EXISTS `quemencontrou`;\n" +
-                "CREATE TABLE `quemencontrou` (\n" +
-                "  `idPessoa` int(11) unsigned NOT NULL,\n" +
-                "  `idEspecie` int(11) unsigned NOT NULL,\n" +
-                "  PRIMARY KEY (`idPessoa`,`idEspecie`),\n" +
-                "  KEY `fk_quemencontrou_2_idx` (`idEspecie`),\n" +
-                "  CONSTRAINT `fk_quemencontrou_1` FOREIGN KEY (`idPessoa`) REFERENCES `pessoa` (`idPessoa`) ON DELETE CASCADE ON UPDATE CASCADE,\n" +
-                "  CONSTRAINT `fk_quemencontrou_2` FOREIGN KEY (`idEspecie`) REFERENCES `especie` (`idEspecie`) ON DELETE CASCADE ON UPDATE CASCADE\n" +
-                ") ENGINE=InnoDB DEFAULT CHARSET=latin1;"
+    public static String getCreateTableOrdem() {
+        StringBuilder sql = new StringBuilder();
+
+       sql.append("CREATE TABLE ordem (" +
+                "    idOrdem  INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "    Ordem    VARCHAR," +
+                "    idClasse INTEGER REFERENCES classe (idClasse) " +
+                ");"
         );
-        sql.append("DROP TABLE IF EXISTS `quemidentificou`;\n" +
-                "CREATE TABLE `quemidentificou` (\n" +
-                "  `idPessoa` int(10) unsigned NOT NULL DEFAULT '0',\n" +
-                "  `idEspecie` int(10) unsigned NOT NULL DEFAULT '0',\n" +
-                "  PRIMARY KEY (`idPessoa`,`idEspecie`),\n" +
-                "  KEY `FK_QuemIdentificou_2` (`idEspecie`),\n" +
-                "  CONSTRAINT `FK_QuemIdentificou_1` FOREIGN KEY (`idPessoa`) REFERENCES `pessoa` (`idPessoa`) ON DELETE CASCADE ON UPDATE CASCADE,\n" +
-                "  CONSTRAINT `FK_QuemIdentificou_2` FOREIGN KEY (`idEspecie`) REFERENCES `especie` (`idEspecie`) ON DELETE CASCADE ON UPDATE CASCADE\n" +
-                ") ENGINE=InnoDB DEFAULT CHARSET=latin1;"
+        sql.append("INSERT INTO ordem (idOrdem, Ordem, idClasse) VALUES (2, 'Orthoptera', 12);\n" +
+                "INSERT INTO ordem (idOrdem, Ordem, idClasse) VALUES (3, 'Lepidoptera', 12);\n" +
+                "INSERT INTO ordem (idOrdem, Ordem, idClasse) VALUES (4, 'Coleoptera', 12);\n" +
+                "INSERT INTO ordem (idOrdem, Ordem, idClasse) VALUES (5, 'Decapoda', 15);\n" +
+                "INSERT INTO ordem (idOrdem, Ordem, idClasse) VALUES (6, 'Diptera', 12);\n" +
+                "INSERT INTO ordem (idOrdem, Ordem, idClasse) VALUES (7, 'Capnodiales', 19);\n" +
+                "INSERT INTO ordem (idOrdem, Ordem, idClasse) VALUES (8, 'Pleosporales', 19);\n" +
+                "INSERT INTO ordem (idOrdem, Ordem, idClasse) VALUES (9, 'Botryosphaeriales', 19);\n" +
+                "INSERT INTO ordem (idOrdem, Ordem, idClasse) VALUES (10, 'Hemiptera', 12);\n"
         );
-        sql.append("DROP TABLE IF EXISTS `regiao`;\n" +
-                "CREATE TABLE `regiao` (\n" +
-                "  `idRegiao` int(10) unsigned NOT NULL AUTO_INCREMENT,\n" +
-                "  `Regiao` varchar(45) NOT NULL DEFAULT '',\n" +
-                "  PRIMARY KEY (`idRegiao`)\n" +
-                ") ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;\n"
+        return sql.toString();
+    }
+
+    public static String getCreateTableFamilia() {
+        StringBuilder sql = new StringBuilder();
+
+        sql.append("CREATE TABLE familia (" +
+                "    idFamilia INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "    Familia   VARCHAR," +
+                "    idOrdem   INTEGER REFERENCES ordem (idOrdem) " +
+                ");"
         );
-        sql.append("DROP TABLE IF EXISTS `reino`;\n" +
-                "CREATE TABLE `reino` (\n" +
-                "  `idReino` int(10) unsigned NOT NULL AUTO_INCREMENT,\n" +
-                "  `Reino` varchar(45) NOT NULL DEFAULT '',\n" +
-                "  PRIMARY KEY (`idReino`)\n" +
-                ") ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;\n"
+        sql.append("INSERT INTO familia (idFamilia, Familia, idOrdem) VALUES (2, 'Diplodia', 9);\n" +
+                "INSERT INTO familia (idFamilia, Familia, idOrdem) VALUES (3, 'Acrididae', 2);\n" +
+                "INSERT INTO familia (idFamilia, Familia, idOrdem) VALUES (4, 'Phoridae', 6);\n" +
+                "INSERT INTO familia (idFamilia, Familia, idOrdem) VALUES (5, 'Dasytidae', 4);\n" +
+                "INSERT INTO familia (idFamilia, Familia, idOrdem) VALUES (6, 'Aphididae', 10);\n" +
+                "INSERT INTO familia (idFamilia, Familia, idOrdem) VALUES (7, 'Davidiellaceeae', 7);\n" +
+                "INSERT INTO familia (idFamilia, Familia, idOrdem) VALUES (8, 'Carabidae', 4);\n" +
+                "INSERT INTO familia (idFamilia, Familia, idOrdem) VALUES (9, 'Tenebrionidae', 4);\n"
         );
-        sql.append("DROP TABLE IF EXISTS tipoutilizador;\n" +
-                "CREATE TABLE tipoutilizador (\n" +
-                "  idtipoutilizador int(11) NOT NULL,\n" +
-                "  tipoutilizador varchar(1000) DEFAULT NULL,\n" +
-                "  PRIMARY KEY (idtipoutilizador)\n" +
-                ") ENGINE=InnoDB DEFAULT CHARSET=latin1;\n"
-        );
-        sql.append("DROP TABLE IF EXISTS `utilizador`;\n" +
-                "CREATE TABLE `utilizador` (\n" +
-                "  `idUtilizador` int(10) NOT NULL AUTO_INCREMENT,\n" +
-                "  `email` varchar(255) NOT NULL DEFAULT '',\n" +
-                "  `Senha` varchar(255) NOT NULL DEFAULT '',\n" +
-                "  `idtipoutilizador` int(11) DEFAULT NULL,\n" +
-                "  PRIMARY KEY (`idUtilizador`),\n" +
-                "  KEY `fk_utilizador_1_idx` (`idtipoutilizador`),\n" +
-                "  CONSTRAINT `fk_utilizador_1` FOREIGN KEY (`idtipoutilizador`) REFERENCES `tipoutilizador` (`idtipoutilizador`) ON DELETE NO ACTION ON UPDATE NO ACTION\n" +
-                ") ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;"
-        );
-        sql.append("INSERT INTO tipoutilizador VALUES ('7', '$pbkdf2-sha512$25000$/n9P6f1f690bgzCm1PofIw$wzTxvm5GWVHWRcgk7f4iZnJGt9Pkd7yAJ4HSIsZnqwOand98.gdf.xRqzqnOcZN8h0n.k1Enx2tcXO8r7qO3sg');\n" +
-                "INSERT INTO tipoutilizador VALUES ('19', '$pbkdf2-sha512$25000$K.W8t9Y6xzgnZOx9zxkDwA$v.palSK9MP5/Uq6gu3LfIk9Pj984VQ4TRiSw6Yq4YJMCqDGvSI4RIRaDf10nJho/Jl2GqMhKJJ4.8pPgVC/CmQ');\n" +
-                "INSERT INTO tipoutilizador VALUES ('2016', '$pbkdf2-sha512$25000$oLQWYqyVMgZAKCUkxJhTSg$JdDWQ7hgQtBk4QAB0z0RHgTd/eD6g.SAsj18RCjC2ghy4cvc9973e1pp0me6Elvv/G67iqgaf/xwjVxEDSt4kw');\n"
-        );
+        return sql.toString();
+    }
 
 
+    public static String getCreateTableGenero() {
+        StringBuilder sql = new StringBuilder();
+
+        sql.append("CREATE TABLE genero (" +
+                "    idGenero  INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "    Genero    VARCHAR DEFAULT ('')," +
+                "    idFamilia INTEGER REFERENCES familia (idFamilia) " +
+                ");"
+        );
+        sql.append("INSERT INTO genero (idGenero, Genero, idFamilia) VALUES (1, 'Graellsinus', 5);\n" +
+                "INSERT INTO genero (idGenero, Genero, idFamilia) VALUES (2, 'Mauroania', 5);\n" +
+                "INSERT INTO genero (idGenero, Genero, idFamilia) VALUES (3, 'Oxynotus', 5);\n" +
+                "INSERT INTO genero (idGenero, Genero, idFamilia) VALUES (4, 'Acroconidiella', 7);\n" +
+                "INSERT INTO genero (idGenero, Genero, idFamilia) VALUES (5, 'Amara', 8);\n" +
+                "INSERT INTO genero (idGenero, Genero, idFamilia) VALUES (6, 'Acyrthosiphon', 6);\n" +
+                "INSERT INTO genero (idGenero, Genero, idFamilia) VALUES (7, 'Aplocnemus', 5);\n" +
+                "INSERT INTO genero (idGenero, Genero, idFamilia) VALUES (8, 'Alphasida', 9);\n" +
+                "INSERT INTO genero (idGenero, Genero, idFamilia) VALUES (15, 'mmmmmm', 3);\n"
+        );
+        return sql.toString();
+    }
+
+
+    public static String getCreateTableEspecie() {
+        StringBuilder sql = new StringBuilder();
+
+       sql.append("CREATE TABLE especie (" +
+                "    idEspecie   INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "    Especie     VARCHAR," +
+                "    idGenero    INTEGER REFERENCES genero (idGenero)," +
+                "    Habitat     VARCHAR," +
+                "    Coordenadas VARCHAR," +
+                "    Notas       VARCHAR," +
+                "    detalhes    VARCHAR," +
+                "    NomeComum   VARCHAR," +
+                "    Codigo      VARCHAR," +
+                "    Validacao   VARCHAR," +
+                "    DataCriacao DATE" +
+                ");"
+        );
+       sql.append("INSERT INTO especie (idEspecie, Especie, idGenero, Habitat, Coordenadas, Notas, detalhes, NomeComum, Codigo, Validacao, DataCriacao) VALUES (12, 'peixe', 1, 'nampula', '32-565', '17', 'electrecista', 'peixe', '4365', '23', '2018-11-04');\n" +
+                "INSERT INTO especie (idEspecie, Especie, idGenero, Habitat, Coordenadas, Notas, detalhes, NomeComum, Codigo, Validacao, DataCriacao) VALUES (13, 'tartaruga', 1, 'lichinga', '243-55', '17', 'estudante', 'tartaruga', '2354', '3', '2018-11-04');\n" +
+                "INSERT INTO especie (idEspecie, Especie, idGenero, Habitat, Coordenadas, Notas, detalhes, NomeComum, Codigo, Validacao, DataCriacao) VALUES (14, 'neldo', 1, 'nampula', '243-55', '17', 'estudante', 'guerzeneldo', '4365', '23', '2018-11-04');\n" +
+                "INSERT INTO especie (idEspecie, Especie, idGenero, Habitat, Coordenadas, Notas, detalhes, NomeComum, Codigo, Validacao, DataCriacao) VALUES (15, 'mario', 5, 'lichinga', '243-55', '17', 'estudante', 'rafath', '4365', '3', '2018-11-04');\n" +
+                "INSERT INTO especie (idEspecie, Especie, idGenero, Habitat, Coordenadas, Notas, detalhes, NomeComum, Codigo, Validacao, DataCriacao) VALUES (16, 'lagarto', 1, 'pemba', '32-565', '17', 'marinho', 'lagarto', '4365', '3', '2018-11-04');\n" +
+                "INSERT INTO especie (idEspecie, Especie, idGenero, Habitat, Coordenadas, Notas, detalhes, NomeComum, Codigo, Validacao, DataCriacao) VALUES (17, 'helena', 1, 'nampula', '243-55', '17', 'estudante', 'rafath', '2354', '', '2018-11-04');\n"
+        );
         return sql.toString();
     }
 }

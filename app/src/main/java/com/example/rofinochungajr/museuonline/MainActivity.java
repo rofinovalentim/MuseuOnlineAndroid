@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -16,7 +17,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.rofinochungajr.museuonline.adapters.EspecieAdapter;
 import com.example.rofinochungajr.museuonline.database.DataBaseOpenHelper;
+import com.example.rofinochungajr.museuonline.domain.model.Especie;
+import com.example.rofinochungajr.museuonline.domain.model.TipoUtilizador;
+import com.example.rofinochungajr.museuonline.domain.repository.EspecieRepository;
+import com.example.rofinochungajr.museuonline.domain.repository.TipoUtilizadorRepository;
+
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -24,7 +32,12 @@ public class MainActivity extends AppCompatActivity {
     private Intent intent;
     private SQLiteDatabase connection;
     private DataBaseOpenHelper dataBaseOpenHelper;
-    private RecyclerView constraintLayout;
+    private RecyclerView lstDados;
+
+    private EspecieAdapter especieAdapter;
+    private EspecieRepository especieRepository;
+    private TipoUtilizadorAdapter tipoUtilizadorAdapter;
+    private TipoUtilizadorRepository tipoUtilizadorRepository;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        constraintLayout=(RecyclerView) findViewById(R.id.recicleViewMain);
+        lstDados=(RecyclerView) findViewById(R.id.recicleViewMain);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -45,8 +58,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//       createConnectionDB();
+        createConnectionDB();
+/*
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
+        lstDados.setLayoutManager(linearLayoutManager);
 
+        especieRepository=new EspecieRepository(connection);
+        List<Especie> dados=especieRepository.getAll();
+        especieAdapter=new EspecieAdapter(dados);
+
+        lstDados.setAdapter(especieAdapter);
+        */
+
+/*
+        tipoUtilizadorRepository=new TipoUtilizadorRepository(connection);
+        List<TipoUtilizador> dados=tipoUtilizadorRepository.getAll();
+        tipoUtilizadorAdapter=new TipoUtilizadorAdapter(dados);
+
+        lstDados.setAdapter(tipoUtilizadorAdapter);
+        */
     }
 
     private void createConnectionDB(){
@@ -54,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             dataBaseOpenHelper=new DataBaseOpenHelper(this);
             connection=dataBaseOpenHelper.getWritableDatabase();
 
-            Snackbar.make(constraintLayout, R.string.msg_sucess_conectionDB, Snackbar.LENGTH_SHORT).setAction("ok",null).show();
+            Snackbar.make(lstDados, R.string.msg_sucess_conectionDB, Snackbar.LENGTH_SHORT).setAction("ok",null).show();
 
         }catch (SQLException ex){
             AlertDialog.Builder dlg=new AlertDialog.Builder(this);
@@ -84,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_lg:{
                 intent=new Intent(MainActivity.this,LoginActivity.class);
                 startActivity(intent);
-              //  Toast.makeText(this,"Ok selecoonado",Toast.LENGTH_SHORT).show();
+                //  Toast.makeText(this,"Ok selecoonado",Toast.LENGTH_SHORT).show();
             }break;
             case R.id.app_bar_search:{
                 Toast.makeText(this,"Cancelar selecoonado",Toast.LENGTH_SHORT).show();
