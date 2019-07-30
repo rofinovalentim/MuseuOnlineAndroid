@@ -54,7 +54,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@string/lbl_nomeComum"
+                    android:text="@string/lbl_nomeComun"
                     app:layout_constraintEnd_toEndOf="@+id/editTextNomeEspecie"
                     app:layout_constraintStart_toStartOf="@+id/editTextNomeEspecie"
                     app:layout_constraintTop_toBottomOf="@+id/editTextNomeEspecie" />

@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".IdentificaoActivity"
+    tools:showIn="@layout/activity_identificao">
+
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+            <TextView
+                android:id="@+id/txtLocalizacao"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:text="@string/lbl_localizacao"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtProvincia"
+                android:layout_width="match_parent"
+                android:layout_height="29dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:text="@string/lbl_provincia"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtLocalizacao" />
+
+            <Spinner
+                android:id="@+id/spinnerProvincia"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/txtProvincia"
+                app:layout_constraintStart_toStartOf="@+id/txtProvincia"
+                app:layout_constraintTop_toBottomOf="@+id/txtProvincia" />
+
+            <TextView
+                android:id="@+id/txtDistrito"
+                android:layout_width="match_parent"
+                android:layout_height="29dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/lbl_distrito"
+                app:layout_constraintEnd_toEndOf="@+id/txtProvincia"
+                app:layout_constraintStart_toStartOf="@+id/txtProvincia"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerProvincia" />
+
+            <Spinner
+                android:id="@+id/spinnerDistrito"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/spinnerProvincia"
+                app:layout_constraintStart_toStartOf="@+id/spinnerProvincia"
+                app:layout_constraintTop_toBottomOf="@+id/txtDistrito" />
+
+            <TextView
+                android:id="@+id/txtPreservacaoEAmeacas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:text="@string/lbl_preservacao"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/txtLocalizacao"
+                app:layout_constraintHorizontal_bias="0.51"
+                app:layout_constraintStart_toStartOf="@+id/txtLocalizacao"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerDistrito" />
+
+            <TextView
+                android:id="@+id/txtMetodoDePreservacao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="24dp"
+                android:text="@string/lbl_metodoPreservacao"
+                app:layout_constraintEnd_toEndOf="@+id/txtDistrito"
+                app:layout_constraintStart_toStartOf="@+id/txtDistrito"
+                app:layout_constraintTop_toBottomOf="@+id/txtPreservacaoEAmeacas" />
+
+            <EditText
+                android:id="@+id/editTextMetodoPreservacao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:layout_marginLeft="24dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="@+id/spinnerDistrito"
+                app:layout_constraintStart_toStartOf="@+id/spinnerDistrito"
+                app:layout_constraintTop_toBottomOf="@+id/txtMetodoDePreservacao" />
+
+            <TextView
+                android:id="@+id/txtAmeacas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="24dp"
+                android:text="@string/lbl_ameacas"
+                app:layout_constraintEnd_toEndOf="@+id/txtMetodoDePreservacao"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/txtMetodoDePreservacao"
+                app:layout_constraintTop_toBottomOf="@+id/editTextMetodoPreservacao" />
+
+            <EditText
+                android:id="@+id/editTextAmeacas"
+                android:layout_width="match_parent"
+                android:layout_marginTop="0dp"
+                android:layout_marginLeft="24dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="@+id/editTextMetodoPreservacao"
+                app:layout_constraintStart_toStartOf="@+id/editTextMetodoPreservacao"
+                app:layout_constraintTop_toBottomOf="@+id/txtAmeacas" />
+
+            <TextView
+                android:id="@+id/txtIdentificacao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/lbl_identificacao"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/txtPreservacaoEAmeacas"
+                app:layout_constraintStart_toStartOf="@+id/txtPreservacaoEAmeacas"
+                app:layout_constraintTop_toBottomOf="@+id/editTextAmeacas" />
+
+            <TextView
+                android:id="@+id/textIdentificador"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="24dp"
+                android:text="@string/lbl_identificador"
+                app:layout_constraintEnd_toEndOf="@+id/txtAmeacas"
+                app:layout_constraintStart_toStartOf="@+id/txtAmeacas"
+                app:layout_constraintTop_toBottomOf="@+id/txtIdentificacao" />
+
+            <EditText
+                android:id="@+id/editTextIdentificador"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="24dp"
+                android:layout_height="45dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="@+id/editTextAmeacas"
+                app:layout_constraintStart_toStartOf="@+id/editTextAmeacas"
+                app:layout_constraintTop_toBottomOf="@+id/textIdentificador" />
+
+            <TextView
+                android:id="@+id/txtIdentificador2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="24dp"
+                android:text="@string/lbl_identificador2"
+                app:layout_constraintEnd_toEndOf="@+id/textIdentificador"
+                app:layout_constraintStart_toStartOf="@+id/textIdentificador"
+                app:layout_constraintTop_toBottomOf="@+id/editTextIdentificador" />
+
+            <EditText
+                android:id="@+id/editTextIdentificador2"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="24dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="@+id/editTextIdentificador"
+                app:layout_constraintStart_toStartOf="@+id/editTextIdentificador"
+                app:layout_constraintTop_toBottomOf="@+id/txtIdentificador2" />
+
+        </LinearLayout>
+
+
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>

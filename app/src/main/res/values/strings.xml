@@ -16,11 +16,10 @@
     </string>
     <string name="textview">TextView</string>
     <string name="name">Name</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">MuseuOnline</string>
     <string name="title_activity_form_especie">Formulário da Especie</string>
     <string name="lbl_NomeEspecie">Nome Especie</string>
     <string name="lbl_nomeComun">Nome Comum</string>
-    <string name="lbl_nomeComum">Nome ConomeComummum</string>
     <string name="lbl_next">Proximo</string>
     <string name="lbl_habitat">Habitat</string>
     <string name="lbl_genero">Genero</string>
@@ -35,4 +34,25 @@
     <string name="title_aviso">Mensagem de Aviso!</string>
     <string name="msg_ok">Ok</string>
     <string name="lbl_detalhes">Detalhes</string>
+    <string name="title_activity_identificacao">Identificacao</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_identificao">Identificação</string>
+    <string name="lbl_localizacao">Localização</string>
+    <string name="lbl_provincia">Provincia</string>
+    <string name="lbl_distrito">Distrito</string>
+    <string name="lbl_preservacao">Preservação e Ameaças</string>
+    <string name="lbl_metodoPreservacao">Metodo de Preservação</string>
+    <string name="lbl_ameacas">Ameaças</string>
+    <string name="lbl_identificacao">Identificação</string>
+    <string name="lbl_identificador">Encontrado Por</string>
+    <string name="lbl_identificador2">Identificado Por</string>
+    <string name="title_activity_multimidia">Multimidia</string>
+    <string name="lbl_image">Imagem</string>
+    <string name="lbl_som">Som</string>
+    <string name="lbl_video">Videp</string>
+    <string name="action_proximo">Próximo</string>
+    <string name="action_salvar">Salvar</string>
+    <string name="title_activity_register">RegisterActivity</string>
 </resources>

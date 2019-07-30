@@ -1,5 +1,6 @@
 package com.example.rofinochungajr.museuonline;
 
+import android.content.Intent;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -51,7 +52,7 @@ public class FormEspecieActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+       // FloatingActionButton fab = findViewById(R.id.fab);
 
         editTextNomeEspecie = (EditText) findViewById(R.id.editTextNomeEspecie);
         editTextNomeComum = (EditText) findViewById(R.id.editTextNomeComum);
@@ -92,7 +93,7 @@ public class FormEspecieActivity extends AppCompatActivity {
 
         MenuInflater inflater = getMenuInflater();
 
-        inflater.inflate(R.menu.menu_form_especie, menu);
+        inflater.inflate(R.menu.nav_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -102,14 +103,20 @@ public class FormEspecieActivity extends AppCompatActivity {
         int id=item.getItemId();
 
         switch (id){
-            case R.id.action_ok:{
-                confirm();
+            case R.id.action_next:{
+
+                Intent intent=new Intent(FormEspecieActivity.this,IdentificaoActivity.class);
+                startActivity(intent);
                 //finish();
                 //Toast.makeText(this,"Ok selecoonado",Toast.LENGTH_SHORT).show();
             }break;
             case R.id.action_cancelar:{
                 Toast.makeText(this,"Cancelar selecoonado",Toast.LENGTH_SHORT).show();
             }break;
+
+            case R.id.action_save:{
+                confirm();
+            }
 
             default:{
                 System.out.println("Invalid Option");
@@ -175,7 +182,7 @@ public class FormEspecieActivity extends AppCompatActivity {
         try {
 
             especieRepository.insert(especie);
-            utilizadorRepository.insert(utilizador);
+            //utilizadorRepository.insert(utilizador);
             finish();
 
         }catch (SQLException ex){
