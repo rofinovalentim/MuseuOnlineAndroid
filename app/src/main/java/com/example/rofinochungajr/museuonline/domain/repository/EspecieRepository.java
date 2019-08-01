@@ -7,13 +7,15 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.rofinochungajr.museuonline.domain.model.Especie;
 
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class EspecieRepository {
 
     private SQLiteDatabase connection;
-    private static  String table="especie";
+    private static final String table="especie";
 
 
 
@@ -25,10 +27,17 @@ public class EspecieRepository {
 
     public void insert(Especie especie){
 
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date currentDate=new Date();
+        String formatedDate= dateFormat.format(currentDate);
+
+
         ContentValues contentValues=new ContentValues();
 
+
         contentValues.put("Especie",especie.getNomeEspecie());
-       // contentValues.put("idGenero",especie.getGenero().getIdGenero());
+      //  contentValues.put("idGenero",especie.getGenero().getIdGenero());
         contentValues.put("Habitat",especie.getHabitat());
         contentValues.put("Coordenadas",especie.getCoordenadas());
         contentValues.put("Notas",especie.getNotas());
@@ -36,7 +45,8 @@ public class EspecieRepository {
         contentValues.put("NomeComum",especie.getNomeComum());
         contentValues.put("Codigo",especie.getCodigo());
         contentValues.put("Validacao",especie.getValidacao());
-//        contentValues.put("DataCriacao",especie.getDataCriacao().toString());
+        contentValues.put("detalhes",especie.getDetalhes());
+        contentValues.put("DataCriacao",formatedDate);
 
         connection.insertOrThrow(table,null,contentValues);
 
@@ -92,7 +102,8 @@ public class EspecieRepository {
                 especie.setNotas(result.getString(result.getColumnIndexOrThrow("Notas")));
                 especie.setDetalhes(result.getString(result.getColumnIndexOrThrow("detalhes")));
                 especie.setNomeComum(result.getString(result.getColumnIndexOrThrow("NomeComum")));
-                especie.setCodigo(result.getString(result.getColumnIndexOrThrow("Validacao")));
+                especie.setCodigo(result.getString(result.getColumnIndexOrThrow("Codigo")));
+                especie.setValidacao(result.getString(result.getColumnIndexOrThrow("Validacao")));
                 especie.setDataCriacao(result.getString(result.getColumnIndexOrThrow("DataCriacao")));
                 //especie.setGenero();
 

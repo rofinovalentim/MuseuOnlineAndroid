@@ -1,15 +1,15 @@
 package com.example.rofinochungajr.museuonline.domain.model;
 
 public class Familia {
-    private int idFamilia;
+    private Integer idFamilia;
     private String familia;
     private Ordem ordem;
 
-    public int getIdFamilia() {
+    public Integer getIdFamilia() {
         return idFamilia;
     }
 
-    public void setIdFamilia(int idFamilia) {
+    public void setIdFamilia(Integer idFamilia) {
         this.idFamilia = idFamilia;
     }
 

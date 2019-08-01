@@ -1,11 +1,11 @@
 package com.example.rofinochungajr.museuonline.domain.model;
 
 public class Ordem {
-    private int idOrdem;
+    private Integer idOrdem;
     private String ordem;
     private Classe classe;
 
-    public int getIdOrdem() {
+    public Integer getIdOrdem() {
         return idOrdem;
     }
 

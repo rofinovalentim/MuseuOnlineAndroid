@@ -1,12 +1,12 @@
 package com.example.rofinochungajr.museuonline.domain.model;
 
 public class Genero {
-    private int idGenero;
+    private Integer idGenero;
     private String genero;
     private Familia idFamilia;
 
 
-    public int getIdGenero() {
+    public Integer getIdGenero() {
         return idGenero;
     }
 
@@ -28,5 +28,10 @@ public class Genero {
 
     public void setIdFamilia(Familia idFamilia) {
         this.idFamilia = idFamilia;
+    }
+
+    @Override
+    public String toString() {
+        return genero;
     }
 }

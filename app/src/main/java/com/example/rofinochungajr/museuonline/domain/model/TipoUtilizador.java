@@ -2,14 +2,14 @@ package com.example.rofinochungajr.museuonline.domain.model;
 
 public class TipoUtilizador {
 
-    private int idTipoUtilizador;
+    private Integer idTipoUtilizador;
     private String tipoUtilizador;
 
-    public int getIdTipoUtilizador() {
+    public Integer getIdTipoUtilizador() {
         return idTipoUtilizador;
     }
 
-    public void setIdTipoUtilizador(int idTipoUtilizador) {
+    public void setIdTipoUtilizador(Integer idTipoUtilizador) {
         this.idTipoUtilizador = idTipoUtilizador;
     }
 

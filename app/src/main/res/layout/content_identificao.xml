@@ -26,6 +26,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
+
+
             <TextView
                 android:id="@+id/txtLocalizacao"
                 android:layout_width="match_parent"
@@ -41,6 +43,29 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/txtRegiao"
+                android:layout_width="match_parent"
+                android:layout_height="29dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:text="@string/lbl_regiao"
+                />
+
+            <Spinner
+                android:id="@+id/spinnerRegiao"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"/>
+
 
             <TextView
                 android:id="@+id/txtProvincia"
@@ -208,6 +233,8 @@
                 app:layout_constraintEnd_toEndOf="@+id/editTextIdentificador"
                 app:layout_constraintStart_toStartOf="@+id/editTextIdentificador"
                 app:layout_constraintTop_toBottomOf="@+id/txtIdentificador2" />
+
+
 
         </LinearLayout>
 

@@ -1,11 +1,11 @@
 package com.example.rofinochungajr.museuonline.domain.model;
 
 public class Filo {
-    private int idFilo;
+    private Integer idFilo;
     private String filo;
     private Reino reino;
 
-    public int getIdFilo() {
+    public Integer getIdFilo() {
         return idFilo;
     }
 

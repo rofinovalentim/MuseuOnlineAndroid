@@ -15,14 +15,19 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.rofinochungajr.museuonline.adapters.EspecieAdapter;
 import com.example.rofinochungajr.museuonline.database.DataBaseOpenHelper;
 import com.example.rofinochungajr.museuonline.domain.model.Especie;
+import com.example.rofinochungajr.museuonline.domain.model.Provincia;
 import com.example.rofinochungajr.museuonline.domain.model.TipoUtilizador;
 import com.example.rofinochungajr.museuonline.domain.repository.EspecieRepository;
+import com.example.rofinochungajr.museuonline.domain.repository.ProvinciaRepository;
 import com.example.rofinochungajr.museuonline.domain.repository.TipoUtilizadorRepository;
+import com.example.rofinochungajr.museuonline.staticsmethods.StaticsMethods;
 
 import java.util.List;
 
@@ -33,11 +38,14 @@ public class MainActivity extends AppCompatActivity {
     private SQLiteDatabase connection;
     private DataBaseOpenHelper dataBaseOpenHelper;
     private RecyclerView lstDados;
+    private TextView textView;
 
     private EspecieAdapter especieAdapter;
     private EspecieRepository especieRepository;
     private TipoUtilizadorAdapter tipoUtilizadorAdapter;
     private TipoUtilizadorRepository tipoUtilizadorRepository;
+    private ProvinciaRepository provinciaRepository;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,8 +53,9 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        lstDados=(RecyclerView) findViewById(R.id.recicleViewMain);
+       // lstDados=(RecyclerView) findViewById(R.id.recicleViewMain);
 
+        textView=(TextView) findViewById(R.id.list);
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +67,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        especieRepository=new EspecieRepository(StaticsMethods.createConnectionDB(this));
+
         createConnectionDB();
+
+        List<Especie> list=especieRepository.getAll();
+
+        for(Especie especie: list){
+            textView.append(especie+"\n\n");
+        }
+
+
+
 /*
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
         lstDados.setLayoutManager(linearLayoutManager);
@@ -84,7 +104,10 @@ public class MainActivity extends AppCompatActivity {
             dataBaseOpenHelper=new DataBaseOpenHelper(this);
             connection=dataBaseOpenHelper.getWritableDatabase();
 
-            Snackbar.make(lstDados, R.string.msg_sucess_conectionDB, Snackbar.LENGTH_SHORT).setAction("ok",null).show();
+
+            especieRepository=new EspecieRepository(connection);
+            provinciaRepository=new ProvinciaRepository(connection);
+//            Snackbar.make(lstDados, R.string.msg_sucess_conectionDB, Snackbar.LENGTH_SHORT).setAction("ok",null).show();
 
         }catch (SQLException ex){
             AlertDialog.Builder dlg=new AlertDialog.Builder(this);

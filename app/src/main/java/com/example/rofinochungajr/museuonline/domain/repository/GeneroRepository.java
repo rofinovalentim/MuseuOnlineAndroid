@@ -4,42 +4,41 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.rofinochungajr.museuonline.domain.model.Genero;
 import com.example.rofinochungajr.museuonline.domain.model.TipoUtilizador;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TipoUtilizadorRepository {
-
-
+public class GeneroRepository {
     private SQLiteDatabase connection;
-    private static final String table="tipoutilizador";
+    private static final String table="genero";
 
 
-    public TipoUtilizadorRepository(SQLiteDatabase connection) {
+    public GeneroRepository(SQLiteDatabase connection) {
         this.connection = connection;
     }
 
 
-    public void insert(TipoUtilizador tipoUtilizador) {
+    public void insert(Genero genero) {
         ContentValues contentValues = new ContentValues();
 
-        //contentValues.put("idtipoutilizador", tipoUtilizador.getIdTipoUtilizador());
-        contentValues.put("tipoutilizador", tipoUtilizador.getTipoUtilizador());
-        //contentValues.put("idtipoutilizador", user.getTipoUtilizador().getIdTipoUtilizador());
+
+        contentValues.put("Genero", genero.getGenero());
+        contentValues.put("idFamilia",genero.getIdFamilia().getIdFamilia());
 
         connection.insertOrThrow(table, null, contentValues);
 
     }
 
-    public void delete(int idTipoUtilizador) {
+    /*public void delete(int idTipoUtilizador) {
         String[] parameters = new String[1];
         parameters[0] = String.valueOf(idTipoUtilizador);
 
-        connection.delete(table, "idtipoutilizador = ?", parameters);
-    }
+        connection.delete("tipoutilizador", "idtipoutilizador = ?", parameters);
+    }*/
 
-    public void update(TipoUtilizador tipoUtilizador) {
+   /* public void update(TipoUtilizador tipoUtilizador) {
         ContentValues contentValues = new ContentValues();
 
         contentValues.put("idtipoutilizador", tipoUtilizador.getIdTipoUtilizador());
@@ -50,16 +49,16 @@ public class TipoUtilizadorRepository {
         parameters[0] = String.valueOf(tipoUtilizador.getIdTipoUtilizador());
 
 
-        connection.update(table, contentValues, "idtipoutilizador = ?", parameters);
+        connection.update("tipoutilizador", contentValues, "idtipoutilizador = ?", parameters);
 
     }
+*/
+    public List<Genero> getAll() {
 
-    public List<TipoUtilizador> getAll() {
-
-        List<TipoUtilizador> tipoUtilizadorList = new ArrayList<TipoUtilizador>();
+        List<Genero> generoList = new ArrayList<Genero>();
 
         StringBuilder sql = new StringBuilder();
-        sql.append("SELECT idtipoutilizador , tipoutilizador ");
+        sql.append("SELECT idGenero,  Genero, idFamilia ");
         sql.append(" FROM "+table);
 
         Cursor result = connection.rawQuery(sql.toString(), null);
@@ -68,44 +67,46 @@ public class TipoUtilizadorRepository {
             result.moveToFirst();
 
             do {
-                TipoUtilizador tipoUtilizador = new TipoUtilizador();
+                Genero genero = new Genero();
 
-                tipoUtilizador.setIdTipoUtilizador(result.getInt(result.getColumnIndexOrThrow("idtipoutilizador")));
-                tipoUtilizador.setTipoUtilizador(result.getString(result.getColumnIndexOrThrow("tipoutilizador")));
+                genero.setIdGenero(result.getInt(result.getColumnIndexOrThrow("idGenero")));
+                genero.setGenero(result.getString(result.getColumnIndexOrThrow("Genero")));
+                //genero.setIdFamilia();
                /* utilizador.setPassword(result.getString(result.getColumnIndexOrThrow("Senha")));
                 utilizador.getTipoUtilizador().setIdTipoUtilizador(result.getInt(result.getColumnIndexOrThrow("idtipoutilizador")));
                 */
 
-                tipoUtilizadorList.add(tipoUtilizador);
+                generoList.add(genero);
 
             } while (result.moveToNext());
 
         }
-        return tipoUtilizadorList;
+        return generoList;
     }
 
-    public TipoUtilizador getTipoUtilizador(int idTipoUtilizador) {
+    public Genero get(int idGenero) {
 
-        TipoUtilizador tipoUtilizador = new TipoUtilizador();
+        Genero genero = new Genero();
 
         StringBuilder sql = new StringBuilder();
 
-        sql.append("SELECT idtipoutilizador, tipoutilizador");
+        sql.append("SELECT idGenero,  Genero, idFamilia ");
         sql.append(" FROM "+table);
-        sql.append(" where idtipoutilizador = ?");
+        sql.append(" where idGenero = ?");
 
         String[] parameters = new String[1];
-        parameters[0] = String.valueOf(idTipoUtilizador);
+        parameters[0] = String.valueOf(idGenero);
 
         Cursor result = connection.rawQuery(sql.toString(), parameters);
 
         if (result.getCount() > 0) {
             result.moveToFirst();
 
-            tipoUtilizador.setIdTipoUtilizador(result.getInt(result.getColumnIndexOrThrow("idtipoutilizador")));
-            tipoUtilizador.setTipoUtilizador(result.getString(result.getColumnIndexOrThrow("tipoutilizador")));
+            genero.setIdGenero(result.getInt(result.getColumnIndexOrThrow("idGenero")));
+            genero.setGenero(result.getString(result.getColumnIndexOrThrow("Genero")));
+            //genero.setIdFamilia(result.getInt(result.getColumnIndexOrThrow("idFamilia")));
 
-            return tipoUtilizador;
+            return genero;
         }
         return null;
     }

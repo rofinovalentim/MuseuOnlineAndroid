@@ -1,14 +1,14 @@
 package com.example.rofinochungajr.museuonline.domain.model;
 
 public class Reino {
-    private  int idReino;
+    private  Integer idReino;
     private String reino;
 
-    public int getIdReino() {
+    public Integer getIdReino() {
         return idReino;
     }
 
-    public void setIdReino(int idReino) {
+    public void setIdReino(Integer idReino) {
         this.idReino = idReino;
     }
 

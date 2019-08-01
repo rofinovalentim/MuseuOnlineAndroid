@@ -12,10 +12,12 @@ import java.util.List;
 public class UtilizadorRepository {
 
     private SQLiteDatabase connection;
+    private TipoUtilizadorRepository tipoUtilizadorRepository;
 
 
     public UtilizadorRepository(SQLiteDatabase connection) {
         this.connection = connection;
+        this.tipoUtilizadorRepository=new TipoUtilizadorRepository(connection);
     }
 
 
@@ -71,7 +73,8 @@ public class UtilizadorRepository {
                 utilizador.setIdUtilizador(result.getInt(result.getColumnIndexOrThrow("idUtilizador")));
                 utilizador.setEmail(result.getString(result.getColumnIndexOrThrow("email")));
                 utilizador.setPassword(result.getString(result.getColumnIndexOrThrow("Senha")));
-                utilizador.getTipoUtilizador().setIdTipoUtilizador(result.getInt(result.getColumnIndexOrThrow("idtipoutilizador")));
+                int idTipoUtilizador=result.getInt(result.getColumnIndexOrThrow("idtipoutilizador"));
+                utilizador.setTipoUtilizador(tipoUtilizadorRepository.getTipoUtilizador(idTipoUtilizador));
 
                 utilizadorList.add(utilizador);
 
@@ -102,8 +105,38 @@ public class UtilizadorRepository {
             utilizador.setIdUtilizador(result.getInt(result.getColumnIndexOrThrow("idUtilizador")));
             utilizador.setEmail(result.getString(result.getColumnIndexOrThrow("email")));
             utilizador.setPassword(result.getString(result.getColumnIndexOrThrow("Senha")));
-            utilizador.getTipoUtilizador().setIdTipoUtilizador(result.getInt(result.getColumnIndexOrThrow("idtipoutilizador")));
+            int idTipoUtilizador =result.getInt(result.getColumnIndexOrThrow("idtipoutilizador"));
+            utilizador.setTipoUtilizador(tipoUtilizadorRepository.getTipoUtilizador(idTipoUtilizador));
+            return utilizador;
+        }
 
+        return null;
+    }
+
+
+    public Utilizador getUtilizadorByEmail(String email) {
+
+        Utilizador utilizador = new Utilizador();
+
+        StringBuilder sql = new StringBuilder();
+
+        sql.append("SELECT idUtilizador, email, Senha, idtipoutilizador");
+        sql.append(" FROM utilizador");
+        sql.append(" where email = ?");
+
+        String[] parameters = new String[1];
+        parameters[0] = String.valueOf(email);
+
+        Cursor result = connection.rawQuery(sql.toString(), parameters);
+
+        if (result.getCount() > 0) {
+            result.moveToFirst();
+
+            utilizador.setIdUtilizador(result.getInt(result.getColumnIndexOrThrow("idUtilizador")));
+            utilizador.setEmail(result.getString(result.getColumnIndexOrThrow("email")));
+            utilizador.setPassword(result.getString(result.getColumnIndexOrThrow("Senha")));
+            int idTipoUtilizador =result.getInt(result.getColumnIndexOrThrow("idtipoutilizador"));
+            utilizador.setTipoUtilizador(tipoUtilizadorRepository.getTipoUtilizador(idTipoUtilizador));
             return utilizador;
         }
 

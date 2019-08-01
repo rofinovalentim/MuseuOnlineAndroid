@@ -1,15 +1,15 @@
 package com.example.rofinochungajr.museuonline.domain.model;
 
 public class Classe {
-    private int idClasse;
+    private Integer idClasse;
     private String classe;
     private Filo filo;
 
-    public int getIdClasse() {
+    public Integer getIdClasse() {
         return idClasse;
     }
 
-    public void setIdClasse(int idClasse) {
+    public void setIdClasse(Integer idClasse) {
         this.idClasse = idClasse;
     }
 

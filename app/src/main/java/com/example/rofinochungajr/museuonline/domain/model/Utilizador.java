@@ -2,8 +2,7 @@ package com.example.rofinochungajr.museuonline.domain.model;
 
 public class Utilizador {
 
-
-    private int idUtilizador;
+    private Integer idUtilizador;
     private String email;
     private String password;
     private TipoUtilizador tipoUtilizador;
@@ -17,11 +16,11 @@ public class Utilizador {
         this.tipoUtilizador = tipoUtilizador;
     }
 
-    public int getIdUtilizador() {
+    public Integer getIdUtilizador() {
         return idUtilizador;
     }
 
-    public void setIdUtilizador(int id) {
+    public void setIdUtilizador(Integer id) {
         this.idUtilizador = id;
     }
 
