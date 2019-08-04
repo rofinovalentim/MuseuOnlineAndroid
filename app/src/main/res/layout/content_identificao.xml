@@ -165,12 +165,12 @@
                 app:layout_constraintStart_toStartOf="@+id/txtMetodoDePreservacao"
                 app:layout_constraintTop_toBottomOf="@+id/editTextMetodoPreservacao" />
 
-            <EditText
-                android:id="@+id/editTextAmeacas"
+            <Spinner
+                android:id="@+id/spinerAmeaca"
                 android:layout_width="match_parent"
-                android:layout_marginTop="0dp"
+                android:layout_height="32dp"
                 android:layout_marginLeft="24dp"
-                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="@+id/editTextMetodoPreservacao"

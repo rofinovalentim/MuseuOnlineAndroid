@@ -5,8 +5,6 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -30,12 +27,9 @@ import com.example.rofinochungajr.museuonline.domain.repository.GeneroRepository
 import com.example.rofinochungajr.museuonline.domain.repository.TipoUtilizadorRepository;
 import com.example.rofinochungajr.museuonline.staticsmethods.StaticsMethods;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FormEspecieActivity extends AppCompatActivity {
-
-
     private EditText editTextNomeEspecie;
     private EditText editTextNomeComum;
     private Spinner spinnerGenero;
@@ -63,6 +57,7 @@ public class FormEspecieActivity extends AppCompatActivity {
         setContentView(R.layout.activity_form_especie);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // FloatingActionButton fab = findViewById(R.id.fab);
 
@@ -76,9 +71,9 @@ public class FormEspecieActivity extends AppCompatActivity {
         editTextValidacao = (EditText) findViewById(R.id.editTextValidacao);
         editTextDetalhes = (EditText) findViewById(R.id.editTextDetalhes);
 
-        connection=StaticsMethods.createConnectionDB(this);
+        connection = StaticsMethods.createConnectionDB(this);
 
-        generoRepository=new GeneroRepository(connection);
+        generoRepository = new GeneroRepository(connection);
 
 
 //        createConnectionDB();
@@ -90,7 +85,7 @@ public class FormEspecieActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGenero.setAdapter(adapter);
 
-        spinnerGenero.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+       /* spinnerGenero.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
@@ -103,7 +98,7 @@ public class FormEspecieActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
 
         //constraintLayout=(ConstraintLayout)findViewById(R.id.constraintFormEspecie);
 
@@ -144,10 +139,14 @@ public class FormEspecieActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         switch (id) {
+            case android.R.id.home: {
+                finish();
+                break;
+            }
             case R.id.action_next: {
+                confirm();
 
-                Intent intent = new Intent(FormEspecieActivity.this, IdentificaoActivity.class);
-                startActivity(intent);
+                // startActivity(intent);
                 //finish();
                 //Toast.makeText(this,"Ok selecoonado",Toast.LENGTH_SHORT).show();
             }
@@ -160,7 +159,8 @@ public class FormEspecieActivity extends AppCompatActivity {
 
             case R.id.action_save: {
                 confirm();
-            }break;
+            }
+            break;
 
             default: {
                 System.out.println("Invalid Option");
@@ -178,18 +178,17 @@ public class FormEspecieActivity extends AppCompatActivity {
         boolean result = false;
         String nomeEspecie = editTextNomeEspecie.getText().toString();
         String nomeComum = editTextNomeComum.getText().toString();
-        ;
+
         String habitat = editTextHabitat.getText().toString();
         String coordenadas = editTextCoordenadas.getText().toString();
         String notas = editTextNotas.getText().toString();
         String detalhes = editTextDetalhes.getText().toString();
         String codigo = editTextCodigo.getText().toString();
         String validacao = editTextValidacao.getText().toString();
-        //String dataCriacao;
-        //int genero=editTextGenero.getText().toString();
-        //int idTipoUtilizador = 7;
 
-        //  utilizador.setIdTipoUtilizador(56);
+
+        genero = (Genero) spinnerGenero.getSelectedItem();
+
         especie.setNomeEspecie(nomeEspecie);
         especie.setNomeComum(nomeComum);
         especie.setHabitat(habitat);
@@ -198,10 +197,10 @@ public class FormEspecieActivity extends AppCompatActivity {
         especie.setCodigo(codigo);
         especie.setValidacao(validacao);
         especie.setDetalhes(detalhes);
-        //especie.setGenero(genero);
+        especie.setGenero(genero);
 
 
-        utilizador.setTipoUtilizador("teste");
+        //utilizador.setTipoUtilizador("teste");
 
 
         if (result = isEmpty(nomeEspecie)) {
@@ -235,7 +234,7 @@ public class FormEspecieActivity extends AppCompatActivity {
                 }
             }
         }
-        if (result){
+        if (result) {
 
             AlertDialog.Builder dlg = new AlertDialog.Builder(this);
             dlg.setTitle(R.string.title_aviso);
@@ -248,22 +247,24 @@ public class FormEspecieActivity extends AppCompatActivity {
     }
 
 
-    private void confirm(){
+    private long confirm() {
 
 
-        utilizador=new TipoUtilizador();
-        especie=new Especie();
-        especieRepository=new EspecieRepository(StaticsMethods.createConnectionDB(this));
-        if(validation()==false) {
+        utilizador = new TipoUtilizador();
+        especie = new Especie();
+        especieRepository = new EspecieRepository(StaticsMethods.createConnectionDB(this));
+        if (validation() == false) {
 
             try {
+                Integer idEspecie =(int) especieRepository.insert(especie);
 
-                especieRepository.insert(especie);
-                Intent intent = new Intent(FormEspecieActivity.this, MainActivity.class);
-                startActivity(intent);
-                //utilizadorRepository.insert(utilizador);
-               // finish();
+                Intent intent = new Intent(FormEspecieActivity.this, IdentificaoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("ESPECIE", especieRepository.get(idEspecie));
+                intent.putExtras(bundle);
 
+                startActivityForResult(intent, 0);
+                return idEspecie;
             } catch (SQLException ex) {
                 AlertDialog.Builder dlg = new AlertDialog.Builder(this);
 
@@ -273,5 +274,7 @@ public class FormEspecieActivity extends AppCompatActivity {
 
             }
         }
+        return -1;
     }
+
 }

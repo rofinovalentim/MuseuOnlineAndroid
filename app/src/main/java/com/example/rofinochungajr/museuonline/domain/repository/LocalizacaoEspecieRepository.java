@@ -26,6 +26,7 @@ public class LocalizacaoEspecieRepository {
         this.distritoRepository=new DistritoRepository(connection);
         this.provinciaRepository=new ProvinciaRepository(connection);
         this.especieRepository=new EspecieRepository(connection);
+        this.regiaoRepository=new RegiaoRepository(connection);
     }
 
 
@@ -93,7 +94,7 @@ public class LocalizacaoEspecieRepository {
 
                 localizacaoEspecie.setIdLocalizacao(result.getInt(result.getColumnIndexOrThrow("idLocalizacao")));
                 localizacaoEspecie.setDistrito(distritoRepository.get(idDistrito));
-                localizacaoEspecie.setEspecie(especieRepository.getOne(idEspecie));
+                localizacaoEspecie.setEspecie(especieRepository.get(idEspecie));
                 localizacaoEspecie.setRegiao(regiaoRepository.get(idRegiao));
                 localizacaoEspecie.setProvincia(provinciaRepository.get(idProvincia));
 
@@ -171,7 +172,7 @@ public class LocalizacaoEspecieRepository {
 
             localizacaoEspecie.setIdLocalizacao(result.getInt(result.getColumnIndexOrThrow("idLocalizacao")));
             localizacaoEspecie.setDistrito(distritoRepository.get(idDistrito));
-            localizacaoEspecie.setEspecie(especieRepository.getOne(idEspecie));
+            localizacaoEspecie.setEspecie(especieRepository.get(idEspecie));
             localizacaoEspecie.setRegiao(regiaoRepository.get(idRegiao));
             localizacaoEspecie.setProvincia(provinciaRepository.get(idProvincia));
             return localizacaoEspecie;

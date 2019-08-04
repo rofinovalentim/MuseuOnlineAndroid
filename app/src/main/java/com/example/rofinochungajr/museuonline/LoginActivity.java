@@ -2,24 +2,23 @@ package com.example.rofinochungajr.museuonline;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Patterns;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.rofinochungajr.museuonline.domain.model.Utilizador;
 import com.example.rofinochungajr.museuonline.domain.repository.UtilizadorRepository;
 import com.example.rofinochungajr.museuonline.staticsmethods.StaticsMethods;
 
-import java.util.regex.Pattern;
-
 public class LoginActivity extends AppCompatActivity {
+
+
 
     private EditText editTextEmailAdress;
     private EditText editTextPassword;
@@ -29,11 +28,15 @@ public class LoginActivity extends AppCompatActivity {
     private SQLiteDatabase connection;
     private Utilizador utilizador;
     private UtilizadorRepository utilizadorRepository;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+
+
 
 
         editTextEmailAdress = (EditText) findViewById(R.id.editTextEmail);
@@ -81,6 +84,8 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
                             if (utilizador.getPassword().equals(password)) {
                                 Snackbar.make(view, "Login efectuado com sucesso", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                                Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                                startActivity(intent);
                             } else {
                                 Snackbar.make(view, "Palavra passe incorecta", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                             }
@@ -92,13 +97,14 @@ public class LoginActivity extends AppCompatActivity {
                         .setAction("Action", null).show();*/
             }
         });
-    }
-
-
-    private boolean validaLogin() {
-
-
-        return true;
+        /*FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });*/
     }
 
 }

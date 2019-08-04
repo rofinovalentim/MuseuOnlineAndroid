@@ -23,6 +23,8 @@ public class DataBaseOpenHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO tipoutilizador (idtipoutilizador, tipoutilizador) VALUES (2016, '$pbkdf2-sha512$25000$oLQWYqyVMgZAKCUkxJhTSg$JdDWQ7hgQtBk4QAB0z0RHgTd/eD6g.SAsj18RCjC2ghy4cvc9973e1pp0me6Elvv/G67iqgaf/xwjVxEDSt4kw');");
 
         sqLiteDatabase.execSQL(ScriptDDL.getCreateTableUtilizador());
+        sqLiteDatabase.execSQL("INSERT INTO utilizador(idUtilizador, nomeCompleto, email, Senha , idtipoutilizador) VALUES (1,'Rofino Valentim','admin@gmail.com','admin',7);");
+
         sqLiteDatabase.execSQL(ScriptDDL.getCreateTableReino());
         sqLiteDatabase.execSQL("INSERT INTO reino (idReino, Reino) VALUES (3, 'Fungi');");
         sqLiteDatabase.execSQL("INSERT INTO reino (idReino, Reino) VALUES (4, 'Protista');");
@@ -166,7 +168,25 @@ public class DataBaseOpenHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO distrito (idDistrito, Distrito, idProvincia) VALUES (57, 'Desconhecida', 4);");
         sqLiteDatabase.execSQL("INSERT INTO distrito (idDistrito, Distrito, idProvincia) VALUES (58, 'desconhecido', 4);");
 
+        sqLiteDatabase.execSQL(ScriptDDL.getCreateTableAmeacas());
+        sqLiteDatabase.execSQL("INSERT INTO ameacas (idAmeaca, ameaca) VALUES (1, 'ATROPELAMENTOS');");
+        sqLiteDatabase.execSQL("INSERT INTO ameacas (idAmeaca, ameaca) VALUES (2, 'ENVENENAMENTO');");
+        sqLiteDatabase.execSQL("INSERT INTO ameacas (idAmeaca, ameaca) VALUES (3, 'DOENÇAS');");
+        sqLiteDatabase.execSQL("INSERT INTO ameacas (idAmeaca, ameaca) VALUES (4, 'TRÁFICO');");
+        sqLiteDatabase.execSQL("INSERT INTO ameacas (idAmeaca, ameaca) VALUES (5, 'CAÇA');");
+        sqLiteDatabase.execSQL("INSERT INTO ameacas (idAmeaca, ameaca) VALUES (6, 'FOGO');");
+        sqLiteDatabase.execSQL("INSERT INTO ameacas (idAmeaca, ameaca) VALUES (7, 'DESTRUIÇÃO DOS AMBIENTES NATURAIS');");
+
         sqLiteDatabase.execSQL(ScriptDDL.getCreateTableLocalizacaoEspecie());
+        sqLiteDatabase.execSQL(ScriptDDL.getCreateTablePessoa());
+        sqLiteDatabase.execSQL(ScriptDDL.getCreateTableQuemEncontrou());
+        sqLiteDatabase.execSQL(ScriptDDL.getCreateTableQuemIdentificou());
+        sqLiteDatabase.execSQL(ScriptDDL.getCreateTableMetodoPreservacao());
+        sqLiteDatabase.execSQL(ScriptDDL.getCreateTablePreservacaoEspecie());
+        sqLiteDatabase.execSQL(ScriptDDL.getCreateTableAmeacasEspecie());
+
+
+
     }
 
     @Override

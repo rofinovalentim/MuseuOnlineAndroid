@@ -19,6 +19,8 @@ import com.example.rofinochungajr.museuonline.domain.repository.TipoUtilizadorRe
 import com.example.rofinochungajr.museuonline.domain.repository.UtilizadorRepository;
 import com.example.rofinochungajr.museuonline.staticsmethods.StaticsMethods;
 
+
+
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText editTextNomeCompleto;
@@ -31,13 +33,13 @@ public class RegisterActivity extends AppCompatActivity {
     private TipoUtilizadorRepository tipoUtilizadorRepository;
     private UtilizadorRepository utilizadorRepository;
     private SQLiteDatabase connection;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
 
         editTextNomeCompleto = (EditText) findViewById(R.id.editTextNomeCompleto);
@@ -49,6 +51,7 @@ public class RegisterActivity extends AppCompatActivity {
         connection=StaticsMethods.createConnectionDB(this);
 
         utilizadorRepository=new UtilizadorRepository(connection);
+        tipoUtilizadorRepository=new TipoUtilizadorRepository(connection);
 
 
         buttonRegisterUser.setOnClickListener(new View.OnClickListener() {
@@ -61,18 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
-
-
     private boolean confirm() {
 
         utilizador = new Utilizador();
@@ -96,7 +88,6 @@ public class RegisterActivity extends AppCompatActivity {
         return false;
     }
 
-
     private boolean validation() {
         boolean result = false;
 
@@ -109,6 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
         utilizador.setTipoUtilizador(tipoUtilizadorRepository.getTipoUtilizador(7));
         utilizador.setPassword(password);
         utilizador.setEmail(email);
+        utilizador.setNomeCompleto(nomeCompleto);
 
         if (result = StaticsMethods.isEmpty(nomeCompleto)) {
             editTextNomeCompleto.requestFocus();
@@ -138,5 +130,5 @@ public class RegisterActivity extends AppCompatActivity {
         }
         return result;
     }
-}
 
+}

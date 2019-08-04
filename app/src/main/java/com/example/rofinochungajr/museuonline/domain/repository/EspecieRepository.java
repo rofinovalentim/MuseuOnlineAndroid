@@ -15,6 +15,7 @@ import java.util.List;
 public class EspecieRepository {
 
     private SQLiteDatabase connection;
+    private GeneroRepository generoRepository;
     private static final String table="especie";
 
 
@@ -22,10 +23,11 @@ public class EspecieRepository {
 
     public EspecieRepository(SQLiteDatabase connection) {
         this.connection = connection;
+        this.generoRepository=new GeneroRepository(connection);
     }
 
 
-    public void insert(Especie especie){
+    public long insert(Especie especie){
 
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -37,7 +39,7 @@ public class EspecieRepository {
 
 
         contentValues.put("Especie",especie.getNomeEspecie());
-      //  contentValues.put("idGenero",especie.getGenero().getIdGenero());
+        contentValues.put("idGenero",especie.getGenero().getIdGenero());
         contentValues.put("Habitat",especie.getHabitat());
         contentValues.put("Coordenadas",especie.getCoordenadas());
         contentValues.put("Notas",especie.getNotas());
@@ -48,8 +50,9 @@ public class EspecieRepository {
         contentValues.put("detalhes",especie.getDetalhes());
         contentValues.put("DataCriacao",formatedDate);
 
-        connection.insertOrThrow(table,null,contentValues);
+        long idEspecie=connection.insertOrThrow(table,null,contentValues);
 
+        return idEspecie;
     }
 
     public void update(Especie especie){
@@ -105,8 +108,8 @@ public class EspecieRepository {
                 especie.setCodigo(result.getString(result.getColumnIndexOrThrow("Codigo")));
                 especie.setValidacao(result.getString(result.getColumnIndexOrThrow("Validacao")));
                 especie.setDataCriacao(result.getString(result.getColumnIndexOrThrow("DataCriacao")));
-                //especie.setGenero();
-
+                Integer idGenero=result.getInt(result.getColumnIndexOrThrow("idGenero"));
+                especie.setGenero(generoRepository.get(idGenero));
 
                 especieList.add(especie);
 
@@ -116,12 +119,12 @@ public class EspecieRepository {
         return especieList;
     }
 
-    public Especie getOne(int idEspecie){
+    public Especie get(int idEspecie){
         Especie especie = new Especie();
 
         StringBuilder sql = new StringBuilder();
 
-        sql.append("SELECT SELECT idEspecie, Especie, idGenero, Habitat, Coordenadas, Notas, detalhes, NomeComum, Codigo, Validacao, DataCriacao ");
+        sql.append("SELECT idEspecie, Especie, idGenero, Habitat, Coordenadas, Notas, detalhes, NomeComum, Codigo, Validacao, DataCriacao ");
         sql.append(" FROM "+table);
         sql.append(" where idEspecie = ?");
 

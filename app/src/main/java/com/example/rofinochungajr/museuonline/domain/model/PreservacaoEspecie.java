@@ -5,6 +5,16 @@ public class PreservacaoEspecie {
     private MetodoDePreservacao metodoDePreservacao;
     private Especie especie;
 
+
+    public PreservacaoEspecie() {
+    }
+
+    public PreservacaoEspecie(Integer idPreservacaoEspecie, MetodoDePreservacao metodoDePreservacao, Especie especie) {
+        this.idPreservacaoEspecie = idPreservacaoEspecie;
+        this.metodoDePreservacao = metodoDePreservacao;
+        this.especie = especie;
+    }
+
     public Integer getIdPreservacaoEspecie() {
         return idPreservacaoEspecie;
     }

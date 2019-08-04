@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:background="#8BC34A"
+    tools:context=".LoginActivity"
+    tools:showIn="@layout/activity_login">
+
+
+            <!-- Here you can replace it with your logo or brand name -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
+            android:orientation="vertical">
+
+
+            <!-- Here you can replace it with your logo or brand name -->
+            <ImageView
+                android:layout_width="240dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center_horizontal"
+                android:padding="16dp"
+                android:layout_marginTop="48dp"
+                android:layout_marginBottom="20dp"
+                app:srcCompat="@drawable/ic_directions_bike_black_24dp"/>
+
+            <EditText
+                android:id="@+id/editTextEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:background="@android:color/transparent"
+                android:drawableLeft="@drawable/baseline_person_white_18"
+                android:drawablePadding="12dp"
+                android:ems="10"
+                android:hint="@string/edittext_emailLogin"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:padding="8dp"
+                android:textColorHint="#ffffff" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f9d7db"
+                />
+
+
+            <EditText
+                android:id="@+id/editTextPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@android:color/transparent"
+                android:drawableLeft="@drawable/baseline_lock_white_18"
+                android:drawablePadding="12dp"
+                android:ems="10"
+                android:hint="@string/hintPalavraPasse"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:paddingLeft="8dp"
+                android:paddingTop="8dp"
+                android:paddingRight="8dp"
+                android:paddingBottom="8dp"
+                android:textColorHint="#ffffff" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f9d7db"
+                />
+
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:padding="8dp"
+                android:text="@string/radioRememberme"
+                android:textColor="#fff" />
+
+            <Button
+                android:id="@+id/btnLogin"
+                style="@style/Base.TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@color/colorPrimaryDark"
+                android:clickable="true"
+                android:padding="16dp"
+                android:text="@string/btn_login"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textSize="18sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/btnCriarConta"
+                style="@style/Base.TextAppearance.AppCompat.Body1"
+                android:layout_width="177dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:clickable="true"
+                android:padding="16dp"
+                android:text="@string/txtCriar_conta"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textSize="18sp"
+                android:textStyle="normal"
+                android:visibility="visible"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/btnEsqueceuPassword"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:padding="16dp"
+                android:text="@string/txtesqueceupalavrapasse"
+                android:textColor="#fff" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</android.support.constraint.ConstraintLayout>

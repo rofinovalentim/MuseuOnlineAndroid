@@ -4,6 +4,14 @@ public class MetodoDePreservacao {
     private  Integer idMetodo;
     private  String metodo;
 
+    public MetodoDePreservacao() {
+    }
+
+    public MetodoDePreservacao(Integer idMetodo, String metodo) {
+        this.idMetodo = idMetodo;
+        this.metodo = metodo;
+    }
+
     public Integer getIdMetodo() {
         return idMetodo;
     }

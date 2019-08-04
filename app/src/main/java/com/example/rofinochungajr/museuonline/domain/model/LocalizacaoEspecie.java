@@ -51,6 +51,8 @@ public class LocalizacaoEspecie {
     public String toString() {
         return "LocalizacaoEspecie{" +
                 "idLocalizacao=" + idLocalizacao +
+                ", regiao=" + regiao +
+                ", provincia=" + provincia +
                 ", distrito=" + distrito +
                 ", especie=" + especie +
                 '}';

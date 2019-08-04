@@ -22,11 +22,25 @@ import android.widget.Toast;
 import com.example.rofinochungajr.museuonline.adapters.EspecieAdapter;
 import com.example.rofinochungajr.museuonline.database.DataBaseOpenHelper;
 import com.example.rofinochungajr.museuonline.domain.model.Especie;
+import com.example.rofinochungajr.museuonline.domain.model.LocalizacaoEspecie;
+import com.example.rofinochungajr.museuonline.domain.model.MetodoDePreservacao;
+import com.example.rofinochungajr.museuonline.domain.model.Pessoa;
+import com.example.rofinochungajr.museuonline.domain.model.PreservacaoEspecie;
 import com.example.rofinochungajr.museuonline.domain.model.Provincia;
+import com.example.rofinochungajr.museuonline.domain.model.QuemEncontrou;
+import com.example.rofinochungajr.museuonline.domain.model.QuemIdentificou;
 import com.example.rofinochungajr.museuonline.domain.model.TipoUtilizador;
+import com.example.rofinochungajr.museuonline.domain.model.Utilizador;
 import com.example.rofinochungajr.museuonline.domain.repository.EspecieRepository;
+import com.example.rofinochungajr.museuonline.domain.repository.LocalizacaoEspecieRepository;
+import com.example.rofinochungajr.museuonline.domain.repository.MetodoPreservacaoRepository;
+import com.example.rofinochungajr.museuonline.domain.repository.PessoaRepository;
+import com.example.rofinochungajr.museuonline.domain.repository.PreservacaoEspecieRepository;
 import com.example.rofinochungajr.museuonline.domain.repository.ProvinciaRepository;
+import com.example.rofinochungajr.museuonline.domain.repository.QuemEncontrouRepository;
+import com.example.rofinochungajr.museuonline.domain.repository.QuemIdentificouRepository;
 import com.example.rofinochungajr.museuonline.domain.repository.TipoUtilizadorRepository;
+import com.example.rofinochungajr.museuonline.domain.repository.UtilizadorRepository;
 import com.example.rofinochungajr.museuonline.staticsmethods.StaticsMethods;
 
 import java.util.List;
@@ -45,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
     private TipoUtilizadorAdapter tipoUtilizadorAdapter;
     private TipoUtilizadorRepository tipoUtilizadorRepository;
     private ProvinciaRepository provinciaRepository;
+    private LocalizacaoEspecieRepository localizacaoEspecieRepository;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
 
        // lstDados=(RecyclerView) findViewById(R.id.recicleViewMain);
 
@@ -67,15 +85,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        especieRepository=new EspecieRepository(StaticsMethods.createConnectionDB(this));
+        connection=StaticsMethods.createConnectionDB(this);
+        especieRepository=new EspecieRepository(connection);
+        localizacaoEspecieRepository=new LocalizacaoEspecieRepository(connection);
 
-        createConnectionDB();
+        MetodoPreservacaoRepository metodoPreservacaoRepository=new MetodoPreservacaoRepository(connection);
+        PreservacaoEspecieRepository preservacaoEspecieRepository=new PreservacaoEspecieRepository(connection);
+        QuemEncontrouRepository quemEncontrouRepository=new QuemEncontrouRepository(connection);
+        QuemIdentificouRepository quemIdentificouRepository=new QuemIdentificouRepository(connection);
+        PessoaRepository pessoaRepository=new PessoaRepository(connection);
+        UtilizadorRepository utilizadorRepository=new UtilizadorRepository(connection);
+        //createConnectionDB();
 
         List<Especie> list=especieRepository.getAll();
 
         for(Especie especie: list){
             textView.append(especie+"\n\n");
         }
+
 
 
 

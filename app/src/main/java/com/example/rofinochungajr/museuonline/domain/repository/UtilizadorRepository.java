@@ -20,16 +20,15 @@ public class UtilizadorRepository {
         this.tipoUtilizadorRepository=new TipoUtilizadorRepository(connection);
     }
 
-
     public void insert(Utilizador user) {
         ContentValues contentValues = new ContentValues();
 
+        contentValues.put("nomeCompleto",user.getNomeCompleto());
         contentValues.put("email", user.getEmail());
         contentValues.put("Senha", user.getPassword());
         contentValues.put("idtipoutilizador", user.getTipoUtilizador().getIdTipoUtilizador());
 
         connection.insertOrThrow("utilizador", null, contentValues);
-
     }
 
     public void delete(int idUtilizador) {
@@ -42,6 +41,7 @@ public class UtilizadorRepository {
     public void update(Utilizador user) {
         ContentValues contentValues = new ContentValues();
 
+        contentValues.put("nomeCompleto",user.getNomeCompleto());
         contentValues.put("email", user.getEmail());
         contentValues.put("Senha", user.getPassword());
         contentValues.put("idtipoutilizador", user.getTipoUtilizador().getIdTipoUtilizador());
@@ -59,7 +59,7 @@ public class UtilizadorRepository {
         List<Utilizador> utilizadorList = new ArrayList<Utilizador>();
 
         StringBuilder sql = new StringBuilder();
-        sql.append("SELECT idUtilizador, email, Senha, idtipoutilizador");
+        sql.append("SELECT idUtilizador, nomeCompleto, email, Senha, idtipoutilizador");
         sql.append(" FROM utilizador");
 
         Cursor result = connection.rawQuery(sql.toString(), null);
@@ -71,6 +71,7 @@ public class UtilizadorRepository {
                 Utilizador utilizador = new Utilizador();
 
                 utilizador.setIdUtilizador(result.getInt(result.getColumnIndexOrThrow("idUtilizador")));
+                utilizador.setNomeCompleto(result.getString(result.getColumnIndexOrThrow("nomeCompleto")));
                 utilizador.setEmail(result.getString(result.getColumnIndexOrThrow("email")));
                 utilizador.setPassword(result.getString(result.getColumnIndexOrThrow("Senha")));
                 int idTipoUtilizador=result.getInt(result.getColumnIndexOrThrow("idtipoutilizador"));
@@ -90,7 +91,7 @@ public class UtilizadorRepository {
 
         StringBuilder sql = new StringBuilder();
 
-        sql.append("SELECT idUtilizador, email, Senha, idtipoutilizador");
+        sql.append("SELECT idUtilizador, nomeCompleto, email, Senha, idtipoutilizador");
         sql.append(" FROM utilizador");
         sql.append(" where idUtilizador = ?");
 
@@ -103,6 +104,7 @@ public class UtilizadorRepository {
             result.moveToFirst();
 
             utilizador.setIdUtilizador(result.getInt(result.getColumnIndexOrThrow("idUtilizador")));
+            utilizador.setNomeCompleto(result.getString(result.getColumnIndexOrThrow("nomeCompleto")));
             utilizador.setEmail(result.getString(result.getColumnIndexOrThrow("email")));
             utilizador.setPassword(result.getString(result.getColumnIndexOrThrow("Senha")));
             int idTipoUtilizador =result.getInt(result.getColumnIndexOrThrow("idtipoutilizador"));
@@ -120,7 +122,7 @@ public class UtilizadorRepository {
 
         StringBuilder sql = new StringBuilder();
 
-        sql.append("SELECT idUtilizador, email, Senha, idtipoutilizador");
+        sql.append("SELECT idUtilizador, nomeCompleto, email, Senha, idtipoutilizador");
         sql.append(" FROM utilizador");
         sql.append(" where email = ?");
 
@@ -133,6 +135,7 @@ public class UtilizadorRepository {
             result.moveToFirst();
 
             utilizador.setIdUtilizador(result.getInt(result.getColumnIndexOrThrow("idUtilizador")));
+            utilizador.setNomeCompleto(result.getString(result.getColumnIndexOrThrow("nomeCompleto")));
             utilizador.setEmail(result.getString(result.getColumnIndexOrThrow("email")));
             utilizador.setPassword(result.getString(result.getColumnIndexOrThrow("Senha")));
             int idTipoUtilizador =result.getInt(result.getColumnIndexOrThrow("idtipoutilizador"));

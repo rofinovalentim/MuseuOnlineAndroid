@@ -4,6 +4,14 @@ public class QuemIdentificou {
     private Pessoa pessoa;
     private Especie especie;
 
+    public QuemIdentificou() {
+    }
+
+    public QuemIdentificou(Pessoa pessoa, Especie especie) {
+        this.pessoa = pessoa;
+        this.especie = especie;
+    }
+
     public Pessoa getPessoa() {
         return pessoa;
     }

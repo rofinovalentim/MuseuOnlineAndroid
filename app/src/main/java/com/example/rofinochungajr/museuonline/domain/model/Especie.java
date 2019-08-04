@@ -1,6 +1,8 @@
 package com.example.rofinochungajr.museuonline.domain.model;
 
-public class Especie {
+import java.io.Serializable;
+
+public class Especie  implements Serializable {
     private Integer idEspecie;
     private String nomeEspecie;
     private Genero genero;

@@ -54,17 +54,17 @@
     <string name="lbl_video">Videp</string>
     <string name="action_proximo">Próximo</string>
     <string name="action_salvar">Salvar</string>
-    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_register">Criar Conta</string>
     <string name="lbl_nomeCompleto">Nome Completo</string>
     <string name="lbl_email">E-mail</string>
     <string name="lbl_password">Palavra-Passe</string>
-    <string name="lbl_confirmarPassword" >Confirmar Palavra-Passe</string>
+    <string name="lbl_confirmarPassword">Confirmar Palavra-Passe</string>
     <string name="btn_registar_user">Registar</string>
     <string name="btn_login">Entrar</string>
-    <string name="edittext_emailLogin">email</string>
+    <string name="edittext_emailLogin">E-mail</string>
     <string name="hintPalavraPasse">Palavra-Passe</string>
     <string name="radioRememberme">Lembrar me</string>
-    <string name="txtCriar_conta">criar conta</string>
+    <string name="txtCriar_conta">Criar Conta</string>
     <string name="txtesqueceupalavrapasse">Esqueceu a sua palavra-passe?</string>
     <string name="lbl_regiao">Região</string>
 </resources>

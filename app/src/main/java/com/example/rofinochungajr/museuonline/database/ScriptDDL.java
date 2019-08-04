@@ -7,6 +7,7 @@ public class ScriptDDL {
 
       sql.append("CREATE TABLE utilizador (" +
               "    idUtilizador     INTEGER PRIMARY KEY AUTOINCREMENT," +
+              "    nomeCompleto VARCHAR ,"+
               "    email            VARCHAR," +
               "    Senha            VARCHAR," +
               "    idtipoutilizador INTEGER REFERENCES tipoutilizador (idtipoutilizador) " +
@@ -214,9 +215,57 @@ public class ScriptDDL {
     public static String getCreateTableQuemEncontrou(){
         StringBuilder sql = new StringBuilder();
 
-        sql.append(";");
+        sql.append("CREATE TABLE quemencontrou (" +
+                "    idPessoa  INTEGER REFERENCES pessoa (idPessoa)," +
+                "    idEspecie INTEGER REFERENCES especie (idEspecie)," +
+                "    PRIMARY KEY (" +
+                "        idPessoa," +
+                "        idEspecie" +
+                "    )" +
+                ");"
+        );
 
         return sql.toString();
     }
 
+    public  static  String getCreateTableAmeacas(){
+        StringBuilder sql=new StringBuilder();
+
+        sql.append("CREATE TABLE ameacas (" +
+                "    idAmeaca INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "    ameaca   VARCHAR" +
+                ");");
+        return sql.toString();
+    }
+
+    public static String getCreateTableAmeacasEspecie(){
+        StringBuilder sql=new StringBuilder();
+
+        sql.append("CREATE TABLE ameacaEspecie (" +
+                "    idAmeaca  INTEGER REFERENCES ameacas (idAmeaca)," +
+                "    idEspecie INTEGER REFERENCES especie (idEspecie)," +
+                "    PRIMARY KEY (" +
+                "        idAmeaca," +
+                "        idEspecie" +
+                "    )" +
+                ");"
+        );
+
+        return  sql.toString();
+    }
+
+    public static String getCreateTableQuemIdentificou(){
+        StringBuilder sql=new StringBuilder();
+
+        sql.append("CREATE TABLE quemidentificou (" +
+                "    idPessoa  INTEGER REFERENCES pessoa (idPessoa)," +
+                "    idEspecie INTEGER REFERENCES especie (idEspecie)," +
+                "    PRIMARY KEY (" +
+                "        idPessoa," +
+                "        idEspecie" +
+                "    )" +
+                ");"
+        );
+        return sql.toString();
+    }
 }
