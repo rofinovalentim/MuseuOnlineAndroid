@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Genero implements Serializable {
     private Integer idGenero;
     private String genero;
-    private Familia idFamilia;
+    private Familia familia;
 
 
     public Integer getIdGenero() {
@@ -24,16 +24,20 @@ public class Genero implements Serializable {
         this.genero = genero;
     }
 
-    public Familia getIdFamilia() {
-        return idFamilia;
+    public Familia getFamilia() {
+        return familia;
     }
 
-    public void setIdFamilia(Familia idFamilia) {
-        this.idFamilia = idFamilia;
+    public void setFamilia(Familia familia) {
+        this.familia = familia;
     }
 
     @Override
     public String toString() {
-        return genero;
+        return "Genero{" +
+                "idGenero=" + idGenero +
+                ", genero='" + genero + '\'' +
+                ", idFamilia=" + familia +
+                '}';
     }
 }

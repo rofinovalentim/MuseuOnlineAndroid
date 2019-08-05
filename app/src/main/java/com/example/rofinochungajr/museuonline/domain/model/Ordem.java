@@ -21,11 +21,20 @@ public class Ordem {
         this.ordem = ordem;
     }
 
-    public Classe getIdClasse() {
+    public Classe getClasse() {
         return classe;
     }
 
-    public void setIdClasse(Classe idClasse) {
-        this.classe = idClasse;
+    public void setClasse(Classe classe) {
+        this.classe = classe;
+    }
+
+    @Override
+    public String toString() {
+        return "Ordem{" +
+                "idOrdem=" + idOrdem +
+                ", ordem='" + ordem + '\'' +
+                ", classe=" + classe +
+                '}';
     }
 }

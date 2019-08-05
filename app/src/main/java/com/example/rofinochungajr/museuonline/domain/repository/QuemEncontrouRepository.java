@@ -73,6 +73,8 @@ public class QuemEncontrouRepository {
                 Integer idEspecie= result.getInt(result.getColumnIndexOrThrow("idEspecie"));
                 Integer idPessoa=result.getInt(result.getColumnIndexOrThrow("idPessoa"));
 
+                quemEncontrou.setPessoa(pessoaRepository.get(idPessoa));
+                quemEncontrou.setEspecie(especieRepository.get(idEspecie));
                 quemEncontrouList.add(quemEncontrou);
 
             } while (result.moveToNext());

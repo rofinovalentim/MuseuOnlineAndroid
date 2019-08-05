@@ -19,4 +19,12 @@ public class Reino {
     public void setReino(String reino) {
         this.reino = reino;
     }
+
+    @Override
+    public String toString() {
+        return "Reino{" +
+                "idReino=" + idReino +
+                ", reino='" + reino + '\'' +
+                '}';
+    }
 }

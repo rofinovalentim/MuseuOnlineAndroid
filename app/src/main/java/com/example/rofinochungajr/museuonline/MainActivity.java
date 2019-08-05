@@ -43,6 +43,7 @@ import com.example.rofinochungajr.museuonline.domain.repository.TipoUtilizadorRe
 import com.example.rofinochungajr.museuonline.domain.repository.UtilizadorRepository;
 import com.example.rofinochungajr.museuonline.staticsmethods.StaticsMethods;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -98,10 +99,30 @@ public class MainActivity extends AppCompatActivity {
         //createConnectionDB();
 
         List<Especie> list=especieRepository.getAll();
+        List<LocalizacaoEspecie> localizacaoEspecieList=localizacaoEspecieRepository.getAll();
 
         for(Especie especie: list){
-            textView.append(especie+"\n\n");
+            textView.append("\n"+especie+"\n");
         }
+
+            /*for (LocalizacaoEspecie localizacaoEspecie: localizacaoEspecieList)
+                if (localizacaoEspecie.getEspecie().getIdEspecie()==especie.getIdEspecie()) {
+
+                    List<QuemEncontrou> quemEncontrouList=quemEncontrouRepository.getAll();
+                    QuemEncontrou quemEncontrou=new QuemEncontrou();
+
+                    for (QuemEncontrou quemEncontrou1: quemEncontrouList){
+                     /*   if(quemEncontrou1.getEspecie().getIdEspecie()==especie.getIdEspecie()){
+                            quemEncontrou=quemEncontrou1;
+                            break;
+                        }*/
+                      //  textView.append("Especie Info: \n" + especie + "\n\n" + "Especie Localizacao: \n" +localizacaoEspecie+"\n");
+
+                   // textView.append("Especie Info: \n" + especie + "\n\n" + "Especie Localizacao: \n" +localizacaoEspecie+"\n");
+                    //textView.append("\nQuem encontrou.: \n"+quemEncontrou);
+                   // break;
+          //      }
+        //}
 
 
 

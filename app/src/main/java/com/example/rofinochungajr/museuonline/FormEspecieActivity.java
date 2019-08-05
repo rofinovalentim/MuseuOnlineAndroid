@@ -260,7 +260,7 @@ public class FormEspecieActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(FormEspecieActivity.this, IdentificaoActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("ESPECIE", especieRepository.get(idEspecie));
+                bundle.putInt("idESPECIE", idEspecie);
                 intent.putExtras(bundle);
 
                 startActivityForResult(intent, 0);

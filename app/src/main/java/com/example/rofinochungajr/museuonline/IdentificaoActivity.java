@@ -114,21 +114,11 @@ public class IdentificaoActivity extends AppCompatActivity {
         Bundle bundle=intent.getExtras();
 
         if(bundle!=null){
-            especie=(Especie) bundle.getSerializable("ESPECIE");
+            Integer idEspecie=(int) bundle.getInt("idESPECIE");
+            especie=especieRepository.get(idEspecie);
             Toast.makeText(this,"O objecto passado"+especie,Toast.LENGTH_LONG).show();
         }
 
-
-
-      /*  Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();*/
-//Tipo de objeto = (Tipo) bundle.getSerializable("KEY");
-      //   myData = (DataClass) bundle.getSerializable("MY_DATA");
-     /*   Integer idEspecie= bundle.getInt("ESPECIE");
-
-        especie=especieRepository.getOne(idEspecie);*/
-
-//        Toast.makeText(this,especie.getNomeComum(),Toast.LENGTH_LONG).show();
 
 
         List<Regiao> regiaoList=regiaoRepository.getAll();

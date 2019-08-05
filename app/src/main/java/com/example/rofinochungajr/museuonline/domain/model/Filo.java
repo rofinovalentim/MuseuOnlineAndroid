@@ -28,4 +28,13 @@ public class Filo {
     public void setReino(Reino reino) {
         this.reino = reino;
     }
+
+    @Override
+    public String toString() {
+        return "Filo{" +
+                "idFilo=" + idFilo +
+                ", filo='" + filo + '\'' +
+                ", reino=" + reino +
+                '}';
+    }
 }

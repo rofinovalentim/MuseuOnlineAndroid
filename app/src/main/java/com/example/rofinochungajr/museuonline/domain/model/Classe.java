@@ -28,4 +28,13 @@ public class Classe {
     public void setFilo(Filo filo) {
         this.filo = filo;
     }
+
+    @Override
+    public String toString() {
+        return "Classe{" +
+                "idClasse=" + idClasse +
+                ", classe='" + classe + '\'' +
+                ", filo=" + filo +
+                '}';
+    }
 }

@@ -21,11 +21,20 @@ public class Familia {
         this.familia = familia;
     }
 
-    public Ordem getIdOrdem() {
+    public Ordem getOrdem() {
         return ordem;
     }
 
-    public void setIdOrdem(Ordem idOrdem) {
-        this.ordem = idOrdem;
+    public void setOrdem(Ordem ordem) {
+        this.ordem = ordem;
+    }
+
+    @Override
+    public String toString() {
+        return "Familia{" +
+                "idFamilia=" + idFamilia +
+                ", familia='" + familia + '\'' +
+                ", ordem=" + ordem +
+                '}';
     }
 }

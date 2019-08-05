@@ -143,10 +143,11 @@ public class EspecieRepository {
             especie.setNotas(result.getString(result.getColumnIndexOrThrow("Notas")));
             especie.setDetalhes(result.getString(result.getColumnIndexOrThrow("detalhes")));
             especie.setNomeComum(result.getString(result.getColumnIndexOrThrow("NomeComum")));
-            especie.setCodigo(result.getString(result.getColumnIndexOrThrow("Validacao")));
+            especie.setCodigo(result.getString(result.getColumnIndexOrThrow("Codigo")));
+            especie.setValidacao(result.getString(result.getColumnIndexOrThrow("Validacao")));
             especie.setDataCriacao(result.getString(result.getColumnIndexOrThrow("DataCriacao")));
-        //  especie.setGenero();
-
+            Integer idGenero=result.getInt(result.getColumnIndexOrThrow("idGenero"));
+            especie.setGenero(generoRepository.get(idGenero));
             return especie;
         }
         return null;

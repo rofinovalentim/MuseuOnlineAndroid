@@ -11,12 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GeneroRepository {
+    private FamiliaRepository familiaRepository;
     private SQLiteDatabase connection;
     private static final String table="genero";
 
 
     public GeneroRepository(SQLiteDatabase connection) {
         this.connection = connection;
+        this.familiaRepository=new FamiliaRepository(connection);
     }
 
 
@@ -25,7 +27,7 @@ public class GeneroRepository {
 
 
         contentValues.put("Genero", genero.getGenero());
-        contentValues.put("idFamilia",genero.getIdFamilia().getIdFamilia());
+        contentValues.put("idFamilia",genero.getFamilia().getIdFamilia());
 
         connection.insertOrThrow(table, null, contentValues);
 
@@ -71,7 +73,8 @@ public class GeneroRepository {
 
                 genero.setIdGenero(result.getInt(result.getColumnIndexOrThrow("idGenero")));
                 genero.setGenero(result.getString(result.getColumnIndexOrThrow("Genero")));
-                //genero.setIdFamilia();
+                Integer idFamilia=result.getInt(result.getColumnIndexOrThrow("idFamilia"));
+                genero.setFamilia(familiaRepository.get(idFamilia));
                /* utilizador.setPassword(result.getString(result.getColumnIndexOrThrow("Senha")));
                 utilizador.getTipoUtilizador().setIdTipoUtilizador(result.getInt(result.getColumnIndexOrThrow("idtipoutilizador")));
                 */
@@ -104,7 +107,8 @@ public class GeneroRepository {
 
             genero.setIdGenero(result.getInt(result.getColumnIndexOrThrow("idGenero")));
             genero.setGenero(result.getString(result.getColumnIndexOrThrow("Genero")));
-            //genero.setIdFamilia(result.getInt(result.getColumnIndexOrThrow("idFamilia")));
+            Integer idFamilia=result.getInt(result.getColumnIndexOrThrow("idFamilia"));
+            genero.setFamilia(familiaRepository.get(idFamilia));
 
             return genero;
         }
